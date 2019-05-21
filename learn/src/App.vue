@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="center">
+      <Leftbl />
+     <Rightbl />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Leftbl from './components/leftbl.vue';
+import Rightbl from './components/rightbl.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Leftbl,
+    Rightbl
   }
 }
 </script>
 
 <style lang="scss">
 #app {
+  background-image: url(assets/bg3.png);
+  padding:20px 3%;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+
+}
+.center{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
 }
 </style>
