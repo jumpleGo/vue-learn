@@ -7,7 +7,7 @@
             <h2>1. Отдаете</h2>
             <ul>
                 <li v-for='item of items' :key="item.class" class="cryptoblock">
-                    <img :src=getImgUrl(item.src) alt="">
+                    <img  :src=getImgUrl(item.src) alt="">
                     <p>{{item.text}}</p>
 
                 </li>
@@ -19,7 +19,7 @@
             <ul>
                 <li v-for='item1 of items1' :key="item1.class" class="cryptoblock">
                     <img :src=getImgUrl(item1.src) alt="">
-                    <p>{{ item1.text }}</p>
+                    <p >{{ item1.text }}</p>
                 </li>
             </ul>
         </div>
@@ -31,9 +31,7 @@
 <script>
 export default {
     name: 'Leftbl',
-    props: {
-        msg: String
-    },
+   
     data() {
         return {
            
@@ -123,7 +121,8 @@ export default {
     methods: {
         getImgUrl(pic) {
             return require('../assets/' + pic);
-        },
+        }
+
 
     },
    
