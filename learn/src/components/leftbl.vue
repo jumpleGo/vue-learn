@@ -1,27 +1,18 @@
 <template>
-<div class="hello">
 
+<div class="hello">
     <div class="leftb">
 
         <div class="firstb">
             <h2>1. Отдаете</h2>
-            <ul>
-                <li v-for='item of items' :key="item.class" class="cryptoblock">
-                    <img  :src=getImgUrl(item.src) alt="">
-                    <p>{{item.text}}</p>
-
-                </li>
-            </ul>
+           <Item v-for='item of items' :key="item.clas" :item="item"  @viewData="viewData"></Item>   
         </div>
 
-        <div class="secondb">
+        <div   class="secondb">
             <h2>2. Получаете</h2>
-            <ul>
-                <li v-for='item1 of items1' :key="item1.class" class="cryptoblock">
-                    <img :src=getImgUrl(item1.src) alt="">
-                    <p >{{ item1.text }}</p>
-                </li>
-            </ul>
+            <Item2 v-for='item1 of items1' :key="item1.class" :item1="item1" @viewData1="viewData1"></Item2>  
+                
+           
         </div>
        
     </div>
@@ -29,34 +20,44 @@
 </template>
 
 <script>
+import Item from './item.vue';
+import Item2 from './item2.vue';
+import _ from "lodash";
+
 export default {
+     components: {
+            Item,
+            Item2
+        },
     name: 'Leftbl',
-   
+    
+ 
     data() {
         return {
+            
            
             items: [{
-                    class: '1',
+                    clas: '1',
                     src: "BTC.png",
                     text: 'Bitcoin'
                 },
                 {
-                    class: '2',
+                    clas: '2',
                     src: "USDT.png",
                     text: 'Tether'
                 },
                 {
-                    class: '3',
+                    clas: '3',
                     src: "GAS.png",
                     text: 'Neo'
                 },
                 {
-                    class: '4',
+                    clas: '4',
                     src: "ETH.png",
                     text: 'Ethereum'
                 },
                 {
-                    class: '5',
+                    clas: '5',
                     src: "EOS.png",
                     text: 'EOS'
                 }
@@ -119,12 +120,27 @@ export default {
     },
 
     methods: {
-        getImgUrl(pic) {
-            return require('../assets/' + pic);
-        }
-
-
+       
+        
+        
+       
+   
+    viewData(clas){
+        let ptpt = _.find(this.items, {clas:clas});
+        this.$emit("viewData", ptpt );
     },
+  
+   
+    }
+    
+    
+            
+        
+       
+        
+
+
+   
    
 
 }
@@ -134,7 +150,9 @@ export default {
 
 <style lang="scss" scoped>
 .hello {
+  
     background-image: url(../assets/bg3.png);
+
     padding: 20px 3%;
 }
 
@@ -182,30 +200,5 @@ ul {
     }
 }
 
-.cryptoblock {
-   
-    font-family: 'Hind Siliguri', sans-serif;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    border: 1px solid rgba(207, 207, 207, 0.356);
 
-    img {
-        margin-left: 20px;
-        width: 30px;
-        height: 30px;
-    }
-
-    p {
-        font-size: 16px;
-        margin-left: 30px;
-    }
-
-    &:hover {
-        background: rgb(238, 238, 238);
-        transition: 0.3s;
-        cursor: pointer;
-    }
-}
 </style>

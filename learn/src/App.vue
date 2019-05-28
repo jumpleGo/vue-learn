@@ -2,19 +2,21 @@
   <div id="app">
     <div class="center">
       
-   <button
+   <!-- <button
     v-for="tab in tabs"
     v-bind:key="tab"
     v-bind:class="['tab-button', { active: currentTab === tab }]"
     v-on:click="currentTab = tab">dasdasd</button>
-    <component v-bind:is="currentTabComponent"></component>
+    <component v-bind:is="currentTabComponent"></component> -->
+    <Leftbl  @viewData="viewData"  />
+    <Rightbl :product="selectedProduct" />
     </div>
   </div>
 </template>
 
 <script>
 import Leftbl from './components/leftbl.vue';
-import Rightbl from './components/rightbl.vue';
+import Rightbl  from './components/rightbl.vue';
 
 
 export default {
@@ -25,6 +27,8 @@ export default {
   },
   data(){
     return{
+      selectedProduct: {},
+      selectedProduct1: {},
        currentTab: 'rightbl',
        tabs: ['rightbl', 'leftbl'],
     }
@@ -33,11 +37,18 @@ export default {
         currentTabComponent: function () {
             return  this.currentTab
         }
-    }
+    },
+   methods:{
+    viewData(product){
+      this.selectedProduct = product;
+    },
+   
+   }
 }
 </script>
 
 <style lang="scss">
+
 #app {
   background-image: url(assets/bg3.png);
   padding:20px 3%;
@@ -48,7 +59,7 @@ export default {
 }
 .center{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
 
 }
