@@ -4,13 +4,15 @@
     <div class="rightb">
         <div class="cryptochange">
             <h2>Откуда</h2>
-            <div class="wallet">
+            <div  :style="{ backgroundColor: product.backgroundcolor, color: product.color }" class="wallet">
                 <div class="top">
                     <img src="../assets/sim-card-chip.png" alt="">
                     <img  :src=getImgUrl(product.src) alt="">
+                    
 
 </div>
                     <div class="center">
+                        
                         <p>wallet adress</p>
                         <input type="text">
 
@@ -101,7 +103,7 @@ export default {
 
         .wallet {
             color: black;
-            background: linear-gradient(to right, #fdc830, #f37335);
+           
             padding: 30px 20px;
             box-shadow: 0 2px 4px #c4c2c2;
             border-radius: 4px;

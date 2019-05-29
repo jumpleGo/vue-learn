@@ -39,27 +39,35 @@ export default {
             items: [{
                     clas: '1',
                     src: "BTC.png",
-                    text: 'Bitcoin'
+                    text: 'Bitcoin',
+                    backgroundcolor: "#f4b41f"
                 },
                 {
                     clas: '2',
                     src: "USDT.png",
-                    text: 'Tether'
-                },
+                    text: 'Tether',
+                    backgroundcolor: "#16a085",
+                    color: "#ffffff"
+  }
+                ,
                 {
                     clas: '3',
                     src: "GAS.png",
-                    text: 'Neo'
+                    text: 'Neo',
+                    backgroundcolor: "#34c150"
                 },
                 {
                     clas: '4',
                     src: "ETH.png",
-                    text: 'Ethereum'
+                    text: 'Ethereum',
+                    backgroundcolor: "#2553a3"
                 },
                 {
                     clas: '5',
                     src: "EOS.png",
-                    text: 'EOS'
+                    text: 'EOS',
+                    backgroundcolor: "#010916",
+                    color: "#ffffff"
                 }
 
             ],
