@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import { bus } from '../main';
 export default {
   
          props: ['item1'],
@@ -21,6 +22,9 @@ export default {
         getImgUrl(pic) {
             return require('../assets/' + pic);
         },
+         viewDetailsClicked(){
+                bus.$emit("viewData1",[this.item1.src, this.item1.text, this.item1.backgroundcolor])
+            }
        
     }
 }

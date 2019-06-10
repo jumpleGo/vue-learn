@@ -8,8 +8,8 @@
     v-bind:class="['tab-button', { active: currentTab === tab }]"
     v-on:click="currentTab = tab">dasdasd</button>
     <component v-bind:is="currentTabComponent"></component> -->
-    <Leftbl  @viewData="viewData"  />
-    <Rightbl :product="selectedProduct" />
+    <Leftbl    />
+    <Rightbl />
     </div>
   </div>
 </template>
@@ -27,23 +27,14 @@ export default {
   },
   data(){
     return{
-      selectedProduct: {},
-      selectedProduct1: {},
-       currentTab: 'rightbl',
-       tabs: ['rightbl', 'leftbl'],
+     
+      
     }
   },
-   computed: {
-        currentTabComponent: function () {
-            return  this.currentTab
-        }
-    },
-   methods:{
-    viewData(product){
-      this.selectedProduct = product;
-    },
+ 
    
-   }
+   
+   
 }
 </script>
 

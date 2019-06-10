@@ -1,6 +1,6 @@
 <template>
 <div>
-    <li @click="viewDetailsClicked"  class="cryptoblock">
+    <li @click="viewDetailsClicked" :class="{active : isActive}" class="cryptoblock">
         <img  :src=getImgUrl(item.src) alt="">
         <p>{{item.text}}</p>
 
@@ -9,20 +9,25 @@
 </template>
 
 <script>
+import { bus } from '../main';
 export default {
     props: ['item'],
-    data(){
-            return{
-
-            }},
+    data() {
+        return {
+            isActive: true,
+        }
+    },
     methods: {
         getImgUrl(pic) {
             return require('../assets/' + pic);
         },
-        viewDetailsClicked(){
-                this.$emit("viewData",this.item.clas);
-            }
-    }
+        viewDetailsClicked() {
+            bus.$emit("viewData", [this.item.src, this.item.text, this.item.backgroundcolor])
+
+        },
+
+    },
+    
 }
 </script>
 
@@ -51,6 +56,9 @@ export default {
         background: rgb(238, 238, 238);
         transition: 0.3s;
         cursor: pointer;
+    }
+    .active{
+        background: rgb(238, 238, 238);
     }
 }
 </style>

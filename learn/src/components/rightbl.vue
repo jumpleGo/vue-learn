@@ -4,15 +4,14 @@
     <div class="rightb">
         <div class="cryptochange">
             <h2>Откуда</h2>
-            <div  :style="{ backgroundColor: product.backgroundcolor, color: product.color }" class="wallet">
+            <div :style={backgroundColor:backgroundcolor} class="wallet">
                 <div class="top">
                     <img src="../assets/sim-card-chip.png" alt="">
-                    <img  :src=getImgUrl(product.src) alt="">
-                    
+                    <img  :src=getImgUrl(src1) alt="">
 
 </div>
                     <div class="center">
-                        
+
                         <p>wallet adress</p>
                         <input type="text">
 
@@ -26,10 +25,10 @@
                     <div class="bankchange">
                         <h2>Куда</h2>
 
-                        <div class="wallet">
+                        <div :style={backgroundColor:backgroundcolor} class="wallet">
                             <div class="top">
                                 <img src="../assets/sim-card-chip.png" alt="">
-
+                                <img :src=getImgUrl(src2) alt="">
 </div>
                                 <div class="center">
                                     <p>card number</p>
@@ -48,22 +47,40 @@
 </template>
 
 <script>
+import {
+    bus
+} from '../main';
 export default {
     name: 'Rightbl',
 
     data() {
-        return {}
+        return {
+            src1: '',
+            text1: '',
+            backgroundcolor1: '',
+            src2: '',
+            text2: '',
+            backgroundcolor2: ''
+        }
 
     },
 
-    props: {
-        product: Object,
-
-    },
     methods: {
         getImgUrl(pic) {
             return require('../assets/' + pic);
         },
+
+    },
+    created() {
+        bus.$on('viewData', data => {
+            this.src1 = data[0];
+            this.backgroundcolor = data[2]
+        });
+
+        bus.$on('viewData1', data => {
+            this.src2 = data[0];
+            this.backgroundcolor2 = data[2]
+        })
     }
 
 }
@@ -103,7 +120,7 @@ export default {
 
         .wallet {
             color: black;
-           
+
             padding: 30px 20px;
             box-shadow: 0 2px 4px #c4c2c2;
             border-radius: 4px;

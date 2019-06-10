@@ -5,12 +5,12 @@
 
         <div class="firstb">
             <h2>1. Отдаете</h2>
-           <Item v-for='item of items' :key="item.clas" :item="item"  @viewData="viewData"></Item>   
+           <Item v-for='item of items' :key="item.clas" :item="item" ></Item>   
         </div>
 
         <div   class="secondb">
             <h2>2. Получаете</h2>
-            <Item2 v-for='item1 of items1' :key="item1.class" :item1="item1" @viewData1="viewData1"></Item2>  
+            <Item2 v-for='item1 of items1' :key="item1.class" :item1="item1" ></Item2>  
                 
            
         </div>
@@ -22,7 +22,7 @@
 <script>
 import Item from './item.vue';
 import Item2 from './item2.vue';
-import _ from "lodash";
+
 
 export default {
      components: {
@@ -133,10 +133,7 @@ export default {
         
        
    
-    viewData(clas){
-        let ptpt = _.find(this.items, {clas:clas});
-        this.$emit("viewData", ptpt );
-    },
+  
   
    
     }
