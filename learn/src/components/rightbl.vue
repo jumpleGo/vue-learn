@@ -17,7 +17,7 @@
 
 </div>
                         <div class="bottom">
-                            сумма: <input type="text"> BTC
+                            сумма: <input type="text" v-model="sellprice"> BTC
 
 </div>
                         </div>
@@ -36,7 +36,7 @@
 
 </div>
                                     <div class="bottom">
-                                        сумма: <input type="text"> RUB
+                                        сумма: <input type="text" v-model="buyprice"> RUB
 
 </div>
                                     </div>
@@ -60,7 +60,9 @@ export default {
             backgroundcolor1: '',
             src2: '',
             text2: '',
-            backgroundcolor2: ''
+            backgroundcolor2: '',
+            sellprice: 0,
+            buyprice: 0,
         }
 
     },
@@ -81,12 +83,21 @@ export default {
             this.src2 = data[0];
             this.backgroundcolor2 = data[2]
         })
+    },
+    watch: {
+        sellprice: function (val) {
+            this.sellprice = val;
+            this.buyprice = val * 594286,59;
+        }
+        ,
+        buyprice:function(val){
+             this.buyprice = val;
+             this.sellprice = val / 594286,59;
+        }
     }
 
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style lang="scss" scoped>
 .hello {

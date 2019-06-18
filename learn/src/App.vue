@@ -1,13 +1,6 @@
 <template>
   <div id="app">
     <div class="center">
-      
-   <!-- <button
-    v-for="tab in tabs"
-    v-bind:key="tab"
-    v-bind:class="['tab-button', { active: currentTab === tab }]"
-    v-on:click="currentTab = tab">dasdasd</button>
-    <component v-bind:is="currentTabComponent"></component> -->
     <Leftbl    />
     <Rightbl />
     </div>
