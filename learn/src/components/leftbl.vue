@@ -5,7 +5,7 @@
 
         <div class="firstb">
             <h2>1. Отдаете</h2>
-           <Item v-for='item of items' :key="item.clas" :item="item" ></Item>   
+           <Item  v-for='item of items' :key="item.clas" :item="item" ></Item>   
         </div>
 
         <div   class="secondb">
@@ -34,8 +34,6 @@ export default {
  
     data() {
         return {
-            
-           
             items: [{
                     clas: '1',
                     src: "BTC.png",

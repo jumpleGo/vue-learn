@@ -55,10 +55,10 @@ export default {
 
     data() {
         return {
-            src1: '',
+            src1: 'BTC.png',
             text1: '',
-            backgroundcolor1: '',
-            src2: '',
+            backgroundcolor: '#f4b41f',
+            src2: 'Advcash.png',
             text2: '',
             backgroundcolor2: '',
             sellprice: 0,
@@ -87,12 +87,12 @@ export default {
     watch: {
         sellprice: function (val) {
             this.sellprice = val;
-            this.buyprice = val * 594286,59;
+            this.buyprice = val * 700000;
         }
         ,
         buyprice:function(val){
              this.buyprice = val;
-             this.sellprice = val / 594286,59;
+             this.sellprice = val / 700000;
         }
     }
 

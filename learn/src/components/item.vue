@@ -1,6 +1,6 @@
 <template>
 <div>
-    <li @click="viewDetailsClicked" :class="{active : isActive}" class="cryptoblock">
+    <li @click="viewDetailsClicked"  class="cryptoblock">
         <img  :src=getImgUrl(item.src) alt="">
         <p>{{item.text}}</p>
 
@@ -14,7 +14,7 @@ export default {
     props: ['item'],
     data() {
         return {
-            isActive: true,
+            
         }
     },
     methods: {
@@ -25,6 +25,8 @@ export default {
             bus.$emit("viewData", [this.item.src, this.item.text, this.item.backgroundcolor])
 
         },
+       
+        
 
     },
     
@@ -57,8 +59,6 @@ export default {
         transition: 0.3s;
         cursor: pointer;
     }
-    .active{
-        background: rgb(238, 238, 238);
-    }
+    
 }
 </style>
