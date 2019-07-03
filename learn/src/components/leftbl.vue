@@ -177,7 +177,7 @@ ul {
     .firstb {
         h2 {
               padding: 15px 10px;
-            font-family: 'Hind Siliguri', sans-serif;
+           font-family: 'Ubuntu', sans-serif;
             font-weight: 500;
             font-size: 18px;
             color: #000000;
@@ -191,7 +191,7 @@ ul {
     .secondb {
         h2 {
              padding: 15px 10px;
-            font-family: 'Hind Siliguri', sans-serif;
+            font-family: 'Ubuntu', sans-serif;
             font-weight: 500;
             font-size: 18px;
             color: #000000;

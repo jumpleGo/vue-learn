@@ -1,7 +1,7 @@
 <template>
     <section class="">
          <div class="top_block">
-            <div class="top_block_main_title">Проверьте ваши данные</div>
+            <div class="top_block_main_title">Проведите оплату</div>
             <!--  <div class="top_block_main_menu"><img class="top_block_main_menu--img" src="images/menu.png" alt=""></div> -->
         </div>
         <div class="pay_block">
@@ -12,22 +12,16 @@
                     <span class="pay_block_man_info_pay_namebank">Bitcoin</span>
                 </div>
                 <div class="pay_block_man_info_data">
-                    <span class="pay_block_man_info_data_card">Адрес: {{ price1.cardnumbercrypto}}</span>
+                    <span class="pay_block_man_info_data_card">Адрес: </span>
                     <span class="pay_block_man_info_data_card">Сумма: {{ price1.giving}} BTC</span>
                 </div>
-<div class="pay_block_man_info_pay">
-                    <img class="pay_block_man_info_pay_imgbank" src="../assets/Advcash.png" alt="">
-                    <span class="pay_block_man_info_pay_namebank">AdvCach</span>
-                </div>
-                 <div class="pay_block_man_info_data">
-                    <span class="pay_block_man_info_data_card">Карта: {{ price1.cardnumberbank}}</span>
-                    <span class="pay_block_man_info_data_card">Сумма: {{ price1.getting}} BTC</span>
-                </div>
-                <button @click="editpath(); timer()" class="btn">Все верно</button>
+
             </div>
+            <img src="../assets/qr.jpg" class="qr" alt="">
 
         </div>
-
+<div id="timer">15:00</div>
+<div class="btn">Я оплатил</div>
 
 
         
@@ -46,56 +40,34 @@ export default {
    },
    computed: {
       ...mapGetters([
-          'price1',
-       
-      ]),
-      
-      
-    
+          'price1'
+      ])
     },
     methods:{
-editpath(){
-    this.$store.dispatch('editpath', 'step3');
-},
-timer(){
-   
-
-  var second = 10;
-  var minute = 15;
-  
-  setInterval(function(){
-    document.getElementById("timer").innerHTML = minute + ":" + second;
-
-    second--;
-    
- if(second < 10){
-     second = '0' + second
-    }
-    if(second == 0){
-      minute--;
-      second = 59;
-    }
-    if(minute == 0 && second == 1){
-      document.getElementById("timer").innerHTML = "Timer Stopped";
-    }
-    if(minute <= -1) {
-      document.getElementById("timer").innerHTML = " ";
-    }
-    if(minute < 10){
-     minute = '0' + minute
-    }
-  }, 1000);
-
-}
+        
     }
 }
 </script>
 
 <style lang="scss" scoped>
+.qr{
+    width: 100px;
+    height: 100px;
+}
 .main{
      padding: 20px 3%;
 }
+   #timer {
+       width:150px;
+        text-align: left !important;
+        padding-left: calc(50% - 75px);
+        padding-top: 40px;
+        padding-bottom: 40px;
+        color: black;
+        font-weight: bold;
+        font-size: 80px;
 
+    }
 section {
     padding: 20px 3%;
     font-family: 'Hind Siliguri', sans-serif;
@@ -128,9 +100,10 @@ section {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        align-items: center;
 
         &_man_info {
-
+margin-top: 40px;
             padding: 5px;
             width: 100%;
             text-align: left;
@@ -138,7 +111,7 @@ section {
             flex-direction: column;
 
             &_pay {
-                margin-top: 40px;
+                margin-top: 0px;
                 display: flex;
                 flex-direction: row;
                 align-items: center;

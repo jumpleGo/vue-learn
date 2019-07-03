@@ -1,6 +1,5 @@
 <template>
 <div class="hello">
-
     <div class="rightb">
         <div class="cryptochange">
             <h2>Откуда</h2>
@@ -9,17 +8,17 @@
                     <img src="../assets/sim-card-chip.png" alt="">
                     <img  :src=getImgUrl(src1) alt="">
 
-</div>
+            </div>
                     <div class="center">
 
                         <p>wallet adress</p>
-                        <input type="text">
+                        <input type="text" v-model="cardnumbercrypto">
 
-</div>
+                    </div>
                         <div class="bottom">
-                            сумма: <input type="text" v-model="sellprice"> BTC
+                            сумма: <input type="text"  v-model="sellprice"> BTC
 
-</div>
+                        </div>
                         </div>
                     </div>
                     <div class="bankchange">
@@ -29,20 +28,21 @@
                             <div class="top">
                                 <img src="../assets/sim-card-chip.png" alt="">
                                 <img :src=getImgUrl(src2) alt="">
-</div>
+                            </div>
                                 <div class="center">
                                     <p>card number</p>
-                                    <input type="text">
+                                    <input type="text" v-model="cardnumberbank">
 
-</div>
+                                </div>
                                     <div class="bottom">
-                                        сумма: <input type="text" v-model="buyprice"> RUB
+                                        сумма: <input type="text"    v-model="buyprice"> RUB
 
-</div>
+                                        </div>
                                     </div>
                                 </div>
-
+                                <button class="btn" @click="bigmethod" >Сохранить</button>
                             </div>
+
                         </div>
 </template>
 
@@ -50,6 +50,7 @@
 import {
     bus
 } from '../main';
+
 export default {
     name: 'Rightbl',
 
@@ -63,6 +64,8 @@ export default {
             backgroundcolor2: '',
             sellprice: 0,
             buyprice: 0,
+            cardnumberbank: " ",
+            cardnumbercrypto: ' '
         }
 
     },
@@ -71,8 +74,31 @@ export default {
         getImgUrl(pic) {
             return require('../assets/' + pic);
         },
+        addPrice() {
+            var obj = {
+                cardnumbercrypto : this.cardnumbercrypto,
+                cardnumberbank : this.cardnumberbank,
+                buyprice: this.buyprice,
+                sellprice: this.sellprice
+            }
+            this.$store.dispatch('addPrice', obj);
+
+        },
+        
+editpath(){
+    this.$store.dispatch('editpath', 'step2');
+},
+bigmethod(){
+this.addPrice();
+this.editpath()
+}
+    
 
     },
+    computed: {
+
+    },
+
     created() {
         bus.$on('viewData', data => {
             this.src1 = data[0];
@@ -82,28 +108,24 @@ export default {
         bus.$on('viewData1', data => {
             this.src2 = data[0];
             this.backgroundcolor2 = data[2]
-        })
+        });
+
     },
     watch: {
         sellprice: function (val) {
             this.sellprice = val;
             this.buyprice = val * 700000;
-        }
-        ,
-        buyprice:function(val){
-             this.buyprice = val;
-             this.sellprice = val / 700000;
+        },
+        buyprice: function (val) {
+            this.buyprice = val;
+            this.sellprice = val / 700000;
         }
     }
-
 }
 </script>
 
 <style lang="scss" scoped>
-.hello {
 
-    padding: 20px 3%;
-}
 
 .rightb {
     font-family: 'Hind Siliguri', sans-serif;
@@ -132,7 +154,7 @@ export default {
         .wallet {
             color: black;
 
-            padding: 30px 20px;
+            padding: 20px 20px;
             box-shadow: 0 2px 4px #c4c2c2;
             border-radius: 4px;
             width: 70%;
@@ -178,7 +200,7 @@ export default {
             color: white;
             background-image: linear-gradient(135deg, rgb(26, 159, 41), rgb(13, 117, 24));
 
-            padding: 30px 20px;
+            padding: 20px 20px;
             box-shadow: 0 2px 4px #c4c2c2;
             border-radius: 4px;
             width: 70%;
