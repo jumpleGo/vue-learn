@@ -12,12 +12,12 @@
                     <span class="pay_block_man_info_pay_namebank">Bitcoin</span>
                 </div>
                 <div class="pay_block_man_info_data">
-                    <span class="pay_block_man_info_data_card">Адрес: </span>
+                    <span class="pay_block_man_info_data_card">Адрес: 1KKPEEgq6tXLMnSAi2WzxvVwTKy8cCNf8B</span>
                     <span class="pay_block_man_info_data_card">Сумма: {{ price1.giving}} BTC</span>
                 </div>
 
             </div>
-            <img src="../assets/qr.jpg" class="qr" alt="">
+            <img src="../assets/qr.png" class="qr" alt="">
 
         </div>
 <div id="timer">15:00</div>
@@ -52,7 +52,7 @@ export default {
 <style lang="scss" scoped>
 .qr{
     width: 100px;
-    height: 100px;
+    height: 100%;
 }
 .main{
      padding: 20px 3%;
@@ -71,7 +71,7 @@ export default {
 section {
     padding: 20px 3%;
     font-family: 'Hind Siliguri', sans-serif;
-    width: 526px;
+    width: 94%;
     background: white;
     box-shadow: 0 2px 4px #c4c2c2;
     border-radius: 4px;
@@ -96,6 +96,7 @@ section {
     }
 
     .pay_block {
+        margin-top: 40px;
         margin-bottom: 5%;
         display: flex;
         flex-direction: row;
@@ -103,7 +104,7 @@ section {
         align-items: center;
 
         &_man_info {
-margin-top: 40px;
+font-family: 'Hind Siliguri', sans-serif;
             padding: 5px;
             width: 100%;
             text-align: left;
@@ -111,6 +112,7 @@ margin-top: 40px;
             flex-direction: column;
 
             &_pay {
+                font-family: 'Hind Siliguri', sans-serif;
                 margin-top: 0px;
                 display: flex;
                 flex-direction: row;
@@ -145,6 +147,7 @@ margin-top: 40px;
             }
 
             &_data {
+                font-family: 'Hind Siliguri', sans-serif;
                 display: flex;
                 flex-direction: column;
 

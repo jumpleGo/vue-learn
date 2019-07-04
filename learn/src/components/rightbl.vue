@@ -76,23 +76,26 @@ export default {
         },
         addPrice() {
             var obj = {
-                cardnumbercrypto : this.cardnumbercrypto,
-                cardnumberbank : this.cardnumberbank,
+                cardnumbercrypto: this.cardnumbercrypto,
+                cardnumberbank: this.cardnumberbank,
                 buyprice: this.buyprice,
                 sellprice: this.sellprice
             }
             this.$store.dispatch('addPrice', obj);
 
         },
-        
-editpath(){
-    this.$store.dispatch('editpath', 'step2');
-},
-bigmethod(){
-this.addPrice();
-this.editpath()
-}
-    
+        editisblocked() {
+            this.$store.commit('EDIT_ISBLOCKED')
+        },
+
+        editpath() {
+            this.$store.dispatch('editpath', 'step2');
+        },
+        bigmethod() {
+            this.editisblocked();
+            this.addPrice();
+            this.editpath()
+        }
 
     },
     computed: {
@@ -125,15 +128,11 @@ this.editpath()
 </script>
 
 <style lang="scss" scoped>
-
-
 .rightb {
     font-family: 'Hind Siliguri', sans-serif;
-    padding: 30px;
-    width: 500px;
-
+    padding: 10px 30px;
+    width: 90%;
     background: white;
-
     border-radius: 5px;
     display: flex;
     flex-direction: column;

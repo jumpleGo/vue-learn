@@ -1,7 +1,9 @@
 <template>
 <div id="app">
     <div class="center">
-        <Leftbl />
+       <div class="left">
+            <Leftbl />
+       </div>
         <div class="block">
             <keep-alive>
             <router-view />
@@ -11,7 +13,7 @@
                 <div class="button_vue buttons">
                     
             <router-link class="buttons_left" to="/" >назад</router-link>
-            <router-link class="buttons_right" :to="{name: name }">далее</router-link>
+            <router-link  class="buttons_right" :to="{name: name }">далее</router-link>
         
                 </div>
             </div>
@@ -49,8 +51,13 @@ export default {
      computed:{
          ...mapGetters([
       'name'
-    ])
+    ]),
+  
+     },
+     methods:{
+        
      }
+    
     
    
      
@@ -58,6 +65,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .btn{
     padding: 10px 20px;
     border: none;
@@ -72,6 +80,7 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     margin-top: 20px;
+    
    
     
 
@@ -120,8 +129,11 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 45%;
 }
-
+.left{
+    width: 50%;
+}
 
 
 .button_vue {

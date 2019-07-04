@@ -23,7 +23,7 @@
                     <span class="pay_block_man_info_data_card">Карта: {{ price1.cardnumberbank}}</span>
                     <span class="pay_block_man_info_data_card">Сумма: {{ price1.getting}} BTC</span>
                 </div>
-                <button @click="editpath(); timer()" class="btn">Все верно</button>
+                <button @click="editpath(); timer(); " class="btn">Все верно</button>
             </div>
 
         </div>
@@ -57,6 +57,7 @@ export default {
 editpath(){
     this.$store.dispatch('editpath', 'step3');
 },
+
 timer(){
    
 
@@ -81,9 +82,9 @@ timer(){
     if(minute <= -1) {
       document.getElementById("timer").innerHTML = " ";
     }
-    if(minute < 10){
-     minute = '0' + minute
-    }
+   
+
+   
   }, 1000);
 
 }
@@ -99,7 +100,7 @@ timer(){
 section {
     padding: 20px 3%;
     font-family: 'Hind Siliguri', sans-serif;
-    width: 526px;
+    width: 94%;
     background: white;
     box-shadow: 0 2px 4px #c4c2c2;
     border-radius: 4px;

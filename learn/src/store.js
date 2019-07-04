@@ -5,38 +5,52 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-giving: 0,
-getting: 0,
-cardnumbercrypto: " ",
-cardnumberbank : " ",
-name : "step2"
-  
+    giving: 0,
+    getting: 0,
+    cardnumbercrypto: " ",
+    cardnumberbank: " ",
+    name: "step2",
+    isblocked: false
+
   },
   mutations: {
-    EDITPATH(state, path){
-state.name = path
+    EDIT_PATH(state, path) {
+      state.name = path
     },
-    ADD_PRICE(state, price ) {
+    ADD_PRICE(state, price) {
       state.giving = price.sellprice,
-      state.getting = price.buyprice,
-      state.cardnumbercrypto = price.cardnumbercrypto,
-      state.cardnumberbank = price.cardnumberbank
-  }
+        state.getting = price.buyprice,
+        state.cardnumbercrypto = price.cardnumbercrypto,
+        state.cardnumberbank = price.cardnumberbank
+    },
+   EDIT_ISBLOCKED(state){
+    
+       state.isblocked = true
+     
+   }
   },
   actions: {
-    addPrice({commit}, price ) {
+    addPrice({
+      commit
+    }, price) {
       commit('ADD_PRICE', price)
+    },
+    editpath({
+      commit
+    }, path) {
+      commit('EDIT_PATH', path)
+    },
+
   },
-  editpath({commit}, path){
-    commit('EDITPATH', path)
-  }
-  },
-  getters:{
+  getters: {
     price1(state) {
       return state
-  },
-  name(state){
-    return state.name 
+    },
+    name(state) {
+      return state.name
+    },
+    isblocked(state){
+      return state.isblocked
+    }
   }
-}
 })

@@ -1,20 +1,18 @@
 <template>
-
 <div class="hello">
     <div class="leftb">
 
-        <div class="firstb">
+        <div class="firstb" :class="{ blocked : isblocked} ">
             <h2>1. Отдаете</h2>
-           <Item  v-for='item of items' :key="item.clas" :item="item" ></Item>   
+            <Item v-for='item of items' :key="item.clas" :item="item"></Item>
         </div>
 
-        <div   class="secondb">
+        <div class="secondb">
             <h2>2. Получаете</h2>
-            <Item2 v-for='item1 of items1' :key="item1.class" :item1="item1" ></Item2>  
-                
-           
+            <Item2 v-for='item1 of items1' :key="item1.class" :item1="item1"></Item2>
+
         </div>
-       
+
     </div>
 </div>
 </template>
@@ -22,16 +20,17 @@
 <script>
 import Item from './item.vue';
 import Item2 from './item2.vue';
-
+import {
+    mapGetters
+} from 'vuex';
 
 export default {
-     components: {
-            Item,
-            Item2
-        },
+    components: {
+        Item,
+        Item2
+    },
     name: 'Leftbl',
-    
- 
+
     data() {
         return {
             items: [{
@@ -46,8 +45,7 @@ export default {
                     text: 'Tether',
                     backgroundcolor: "#16a085",
                     color: "#ffffff"
-  }
-                ,
+                },
                 {
                     clas: '3',
                     src: "GAS.png",
@@ -126,25 +124,13 @@ export default {
     },
 
     methods: {
-       
-        
-        
-       
-   
-  
-  
-   
+
+    },
+    computed: {
+        ...mapGetters([
+            'isblocked'
+        ])
     }
-    
-    
-            
-        
-       
-        
-
-
-   
-   
 
 }
 </script>
@@ -153,10 +139,28 @@ export default {
 
 <style lang="scss" scoped>
 .hello {
-  
+
     background-image: url(../assets/bg3.png);
 
     padding: 20px 3%;
+
+}
+
+.blocked {
+    &:after {
+        margin-top: 20px;
+        margin-left: 4.4%;
+        content: '';
+        display: block;
+        top: 0%;
+        left: 0%;
+        background-color: rgba(83, 83, 83, 0.048);
+        height: 90%;
+        width: 39.5%;
+        position: absolute;
+        z-index: 1;
+
+    }
 }
 
 ul {
@@ -165,7 +169,8 @@ ul {
 }
 
 .leftb {
-    width: 560px;
+
+    width: 90%;
     background: white;
     padding: 0px;
     border-radius: 5px;
@@ -176,8 +181,8 @@ ul {
 
     .firstb {
         h2 {
-              padding: 15px 10px;
-           font-family: 'Ubuntu', sans-serif;
+            padding: 15px 10px;
+            font-family: 'Ubuntu', sans-serif;
             font-weight: 500;
             font-size: 18px;
             color: #000000;
@@ -190,7 +195,7 @@ ul {
 
     .secondb {
         h2 {
-             padding: 15px 10px;
+            padding: 15px 10px;
             font-family: 'Ubuntu', sans-serif;
             font-weight: 500;
             font-size: 18px;
@@ -202,6 +207,4 @@ ul {
         width: 50%;
     }
 }
-
-
 </style>
