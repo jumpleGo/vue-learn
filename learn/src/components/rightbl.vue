@@ -3,7 +3,7 @@
     <div class="rightb">
         <div class="cryptochange">
             <h2>Откуда</h2>
-            <div :style={backgroundColor:backgroundcolor} class="wallet">
+            <div :style="{backgroundColor:backgroundcolor, color: color}" class="wallet">
                 <div class="top">
                     <img src="../assets/sim-card-chip.png" alt="">
                     <img  :src=getImgUrl(src1) alt="">
@@ -11,12 +11,12 @@
             </div>
                     <div class="center">
 
-                        <p>wallet adress</p>
-                        <input type="text" v-model="cardnumbercrypto">
+                        <p>Адрес кошелька</p>
+                        <input type="text" :style="{color:color}" v-model="cardnumbercrypto" placeholder="1NeJEFzY8PbVS9RvYPfDP93iqXxHjav791">
 
                     </div>
                         <div class="bottom">
-                            сумма: <input type="text"  v-model="sellprice"> BTC
+                            Cумма: <input type="text" :style="{color:color}"  v-model="sellprice" placeholder="1.2"> {{utf}}
 
                         </div>
                         </div>
@@ -24,18 +24,18 @@
                     <div class="bankchange">
                         <h2>Куда</h2>
 
-                        <div :style={backgroundColor:backgroundcolor} class="wallet">
+                        <div :style={background:backgroundcolor2} class="wallet">
                             <div class="top">
                                 <img src="../assets/sim-card-chip.png" alt="">
                                 <img :src=getImgUrl(src2) alt="">
                             </div>
                                 <div class="center">
-                                    <p>card number</p>
-                                    <input type="text" v-model="cardnumberbank">
+                                    <p>Номер карты</p>
+                                    <input class="mask" type="text" v-model="cardnumberbank">
 
                                 </div>
                                     <div class="bottom">
-                                        сумма: <input type="text"    v-model="buyprice"> RUB
+                                        Cумма: <input type="text"    v-model="buyprice"> RUB
 
                                         </div>
                                     </div>
@@ -61,11 +61,13 @@ export default {
             backgroundcolor: '#f4b41f',
             src2: 'Advcash.png',
             text2: '',
-            backgroundcolor2: '',
-            sellprice: 0,
-            buyprice: 0,
+            backgroundcolor2: 'linear-gradient(135deg, rgb(26, 159, 41), rgb(13, 117, 24))',
+            sellprice: '',
+            buyprice:'',
             cardnumberbank: " ",
-            cardnumbercrypto: ' '
+            cardnumbercrypto: '',
+            utf: 'BTC',
+            color:''
         }
 
     },
@@ -105,7 +107,9 @@ export default {
     created() {
         bus.$on('viewData', data => {
             this.src1 = data[0];
-            this.backgroundcolor = data[2]
+            this.backgroundcolor = data[2];
+            this.utf = data[3],
+            this.color = data[4]
         });
 
         bus.$on('viewData1', data => {
@@ -128,6 +132,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+input{
+    background: rgba(0, 0, 0, 0.103);
+    padding: 5px;
+    border: none;
+    outline: none;
+}
+input::placeholder{
+    color: rgba(0, 0, 0, 0.493);
+}
 .rightb {
     font-family: 'Hind Siliguri', sans-serif;
     padding: 10px 30px;
@@ -151,7 +164,7 @@ export default {
         justify-content: space-between;
 
         .wallet {
-            color: black;
+           
 
             padding: 20px 20px;
             box-shadow: 0 2px 4px #c4c2c2;
@@ -178,6 +191,9 @@ export default {
             .bottom {
                 font-size: 19px;
                 text-align: left;
+                input{
+                    min-width: 20px;
+                }
             }
 
             .center {
@@ -185,6 +201,13 @@ export default {
                 display: flex;
                 flex-direction: column;
                 text-align: left;
+                p{
+                    margin-top: 15px;
+                    margin-bottom: 10px;
+                }
+                input{
+                   text-align: center;
+                }
             }
         }
     }
@@ -197,7 +220,7 @@ export default {
 
         .wallet {
             color: white;
-            background-image: linear-gradient(135deg, rgb(26, 159, 41), rgb(13, 117, 24));
+            
 
             padding: 20px 20px;
             box-shadow: 0 2px 4px #c4c2c2;
@@ -220,6 +243,9 @@ export default {
             .bottom {
                 font-size: 19px;
                 text-align: left;
+                input{
+                    color:white
+                }
             }
 
             .center {
@@ -227,6 +253,10 @@ export default {
                 display: flex;
                 flex-direction: column;
                 text-align: left;
+                input{
+                    color: white;
+                    font-size: 22px;
+                }
             }
         }
     }

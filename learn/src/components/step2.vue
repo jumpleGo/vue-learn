@@ -1,100 +1,116 @@
 <template>
-    <section class="">
-         <div class="top_block">
-            <div class="top_block_main_title">Проверьте ваши данные</div>
-            <!--  <div class="top_block_main_menu"><img class="top_block_main_menu--img" src="images/menu.png" alt=""></div> -->
-        </div>
-        <div class="pay_block">
-            <div class="pay_block_man_info">
-
-                <div class="pay_block_man_info_pay">
-                    <img class="pay_block_man_info_pay_imgbank" src="../assets/BTC.png" alt="">
-                    <span class="pay_block_man_info_pay_namebank">Bitcoin</span>
-                </div>
-                <div class="pay_block_man_info_data">
-                    <span class="pay_block_man_info_data_card">Адрес: {{ price1.cardnumbercrypto}}</span>
-                    <span class="pay_block_man_info_data_card">Сумма: {{ price1.giving}} BTC</span>
-                </div>
-<div class="pay_block_man_info_pay">
-                    <img class="pay_block_man_info_pay_imgbank" src="../assets/Advcash.png" alt="">
-                    <span class="pay_block_man_info_pay_namebank">AdvCach</span>
-                </div>
-                 <div class="pay_block_man_info_data">
-                    <span class="pay_block_man_info_data_card">Карта: {{ price1.cardnumberbank}}</span>
-                    <span class="pay_block_man_info_data_card">Сумма: {{ price1.getting}} BTC</span>
-                </div>
-                <button @click="editpath(); timer(); " class="btn">Все верно</button>
-            </div>
-
-        </div>
-
-
-
+<section class="">
+    <div class="top_block">
+        <div class="top_block_main_title">Проверьте ваши данные</div>
         
+    </div>
+    <div class="pay_block">
+        <div class="pay_block_man_info">
 
-       
-    </section>
+            <div class="pay_block_man_info_pay">
+                <img class="pay_block_man_info_pay_imgbank" :src=getImgUrl(src1) alt="">
+                <span class="pay_block_man_info_pay_namebank">{{text}}</span>
+            </div>
+            <div class="pay_block_man_info_data">
+                <span class="pay_block_man_info_data_card">Адрес: {{ price1.cardnumbercrypto}}</span>
+                <span class="pay_block_man_info_data_card">Сумма: {{ price1.giving}} {{utf}}</span>
+            </div>
+            <div class="pay_block_man_info_pay">
+                <img class="pay_block_man_info_pay_imgbank" :src=getImgUrl(src2) alt="">
+                <span class="pay_block_man_info_pay_namebank">{{text2}}</span>
+            </div>
+            <div class="pay_block_man_info_data">
+                <span class="pay_block_man_info_data_card">Карта: {{ price1.cardnumberbank}}</span>
+                <span class="pay_block_man_info_data_card">Сумма: {{ price1.getting}} RUB</span>
+            </div>
+            <button @click="editpath(); timer(); " class="btn">Все верно</button>
+        </div>
+
+    </div>
+
+</section>
 </template>
+
 <script>
-import { mapGetters } from 'vuex';
+import {
+    mapGetters
+} from 'vuex';
+import {
+    bus
+} from '../main';
 
 export default {
-   data(){
-       return{
-           
-       }
-   },
-   computed: {
-      ...mapGetters([
-          'price1',
-       
-      ]),
-      
-      
-    
+    data() {
+        return {
+           src2:'',
+           src1:''
+        }
     },
-    methods:{
-editpath(){
-    this.$store.dispatch('editpath', 'step3');
-},
+    computed: {
+        ...mapGetters([
+            'price1',
 
-timer(){
-   
+        ]),
+        
 
-  var second = 10;
-  var minute = 15;
-  
-  setInterval(function(){
-    document.getElementById("timer").innerHTML = minute + ":" + second;
+    },
+   beforeCreate()  {
+        bus.$on('viewData', data => {
+            this.src1 = data[0];
+            this.text = data[1];
+            this.utf = data[3]
 
-    second--;
-    
- if(second < 10){
-     second = '0' + second
-    }
-    if(second == 0){
-      minute--;
-      second = 59;
-    }
-    if(minute == 0 && second == 1){
-      document.getElementById("timer").innerHTML = "Timer Stopped";
-    }
-    if(minute <= -1) {
-      document.getElementById("timer").innerHTML = " ";
-    }
-   
+        });
 
-   
-  }, 1000);
+        bus.$on('viewData1', data => {
+            this.src2 = data[0];
+            this.text2 = data[1];
 
-}
+        });
+
+    },
+    methods: {
+        editpath() {
+            this.$store.dispatch('editpath', 'step3');
+        },
+        getImgUrl(pic) {
+            return require('../assets/' + pic);
+        },
+
+        timer() {
+
+            var second = 10;
+            var minute = 15;
+
+            setInterval(function () {
+                document.getElementById("timer").innerHTML = minute + ":" + second;
+
+                second--;
+
+                if (second < 10) {
+                    second = '0' + second
+                }
+                if (second == 0) {
+                    minute--;
+                    second = 59;
+                }
+                if (minute == 0 && second == 1) {
+                    document.getElementById("timer").innerHTML = "Timer Stopped";
+                }
+                if (minute <= -1) {
+                    document.getElementById("timer").innerHTML = " ";
+                }
+
+            }, 1000);
+
+        }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.main{
-     padding: 20px 3%;
+.main {
+    padding: 20px 3%;
 }
 
 section {
@@ -105,9 +121,8 @@ section {
     box-shadow: 0 2px 4px #c4c2c2;
     border-radius: 4px;
     display: flex;
-   
+
     flex-direction: column;
-    
 
     .top_block {
         display: flex;
@@ -120,7 +135,6 @@ section {
             color: black;
             font-weight: bold;
         }
-
 
     }
 
@@ -143,12 +157,11 @@ section {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-&_imgbank{
-    width: 30px;
-    height:30px;
-}
 
-
+                &_imgbank {
+                    width: 30px;
+                    height: 30px;
+                }
 
                 &_success {
                     text-align: center;
@@ -161,14 +174,11 @@ section {
                     font-size: 22px;
                 }
 
-
-
                 &_totaltext {
 
                     color: #484848;
                     font-size: 19px;
                 }
-
 
             }
 
@@ -181,11 +191,9 @@ section {
                     font-size: 19px;
                 }
 
-
             }
-
 
         }
     }
-   }
+}
 </style>

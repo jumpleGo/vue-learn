@@ -13,7 +13,8 @@ export default new Router({
     {
       path: '/',
       name: 'Rightbl',
-      component: rightbl
+      component: rightbl,
+      props: true
     },
     {
       path: '/Step2',

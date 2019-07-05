@@ -22,7 +22,7 @@ export default {
             return require('../assets/' + pic);
         },
         viewDetailsClicked() {
-            bus.$emit("viewData", [this.item.src, this.item.text, this.item.backgroundcolor])
+            bus.$emit("viewData", [this.item.src, this.item.text, this.item.backgroundcolor, this.item.utf, this.item.color])
 
         },
        

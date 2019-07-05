@@ -37,33 +37,43 @@ export default {
                     clas: '1',
                     src: "BTC.png",
                     text: 'Bitcoin',
-                    backgroundcolor: "#f4b41f"
+                    backgroundcolor: "#f4b41f",
+                    utf: 'BTC',
+                    color: 'black'
                 },
                 {
                     clas: '2',
                     src: "USDT.png",
                     text: 'Tether',
                     backgroundcolor: "#16a085",
-                    color: "#ffffff"
+                    
+                    utf: 'USDT',
+                    color:'white'
                 },
                 {
                     clas: '3',
                     src: "GAS.png",
                     text: 'Neo',
-                    backgroundcolor: "#34c150"
+                    backgroundcolor: "#34c150",
+                    utf: "NEO",
+                    color: "black"
                 },
                 {
                     clas: '4',
                     src: "ETH.png",
                     text: 'Ethereum',
-                    backgroundcolor: "#2553a3"
+                    backgroundcolor: "#2553a3",
+                    utf:"ETH",
+                    color:'white'
                 },
                 {
                     clas: '5',
                     src: "EOS.png",
                     text: 'EOS',
                     backgroundcolor: "#010916",
-                    color: "#ffffff"
+                   
+                    utf:"EOS",
+                    color:'white'
                 }
 
             ],
@@ -71,52 +81,42 @@ export default {
             items1: [{
                     class: '1',
                     src: "Advcash.png",
-                    text: 'Advcash'
+                    text: 'Advcash',
+                     backgroundcolor: "linear-gradient(135deg, rgb(26, 159, 41), rgb(13, 117, 24))",
                 },
                 {
                     class: '2',
                     src: "Alfabank.png",
-                    text: 'Alfabank'
+                    text: 'Alfabank',
+                    backgroundcolor: 'linear-gradient(to right, #f00000, #dc281e)'
                 },
-                {
-                    class: '3',
-                    src: "Payeer.png",
-                    text: 'Payeer'
-                },
+               
                 {
                     class: '4',
                     src: "Paypal.png",
-                    text: 'Paypal'
+                    text: 'Paypal',
+                    backgroundcolor: 'linear-gradient(to right, #0052d4, #0052d4, #0052d4)'
                 },
-                {
-                    class: '5',
-                    src: "Payza.png",
-                    text: 'Payza'
-                },
-                {
-                    class: '6',
-                    src: "Perfect-Money.png",
-                    text: 'Perfect-Money'
-                },
+               
+                
                 {
                     class: '7',
                     src: "Qiwi.png",
-                    text: 'Qiwi RUB'
+                    text: 'Qiwi RUB',
+                    backgroundcolor: 'linear-gradient(to right, #ffb75e, #ed8f03)'
                 },
                 {
                     class: '8',
                     src: "Sberbank.png",
-                    text: 'Sberbank RUB'
+                    text: 'Sberbank RUB',
+                    backgroundcolor: '#046A38'
                 },
-                {
-                    class: '9',
-                    src: "Skrill.png",
-                    text: 'Skrill '
-                },
+               
                 {
                     class: '10',
                     src: "Tinkoff.png",
-                    text: 'Tinkoff RUB'
+                    text: 'Tinkoff RUB',
+                    backgroundcolor: 'linear-gradient(to right, #283048, #859398)'
                 }
 
             ]
@@ -139,11 +139,8 @@ export default {
 
 <style lang="scss" scoped>
 .hello {
-
     background-image: url(../assets/bg3.png);
-
     padding: 20px 3%;
-
 }
 
 .blocked {
@@ -155,7 +152,7 @@ export default {
         top: 0%;
         left: 0%;
         background-color: rgba(83, 83, 83, 0.048);
-        height: 90%;
+        height: 58%;
         width: 39.5%;
         position: absolute;
         z-index: 1;

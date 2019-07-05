@@ -1,7 +1,7 @@
 <template>
 <div>
-    <li @click="viewDetailsClicked"  class="cryptoblock">
-        <img  :src=getImgUrl(item1.src) alt="">
+    <li @click="viewDetailsClicked" class="cryptoblock">
+        <img :src=getImgUrl(item1.src) alt="">
         <p>{{item1.text}}</p>
 
     </li>
@@ -9,23 +9,24 @@
 </template>
 
 <script>
-import { bus } from '../main';
+import {
+    bus
+} from '../main';
 export default {
-  
-         props: ['item1'],
 
-    
-    data(){
-            return{}
-            },
+    props: ['item1'],
+
+    data() {
+        return {}
+    },
     methods: {
         getImgUrl(pic) {
             return require('../assets/' + pic);
         },
-         viewDetailsClicked(){
-                bus.$emit("viewData1",[this.item1.src, this.item1.text, this.item1.backgroundcolor])
-            }
-       
+        viewDetailsClicked() {
+            bus.$emit("viewData1", [this.item1.src, this.item1.text, this.item1.backgroundcolor])
+        }
+
     }
 }
 </script>
