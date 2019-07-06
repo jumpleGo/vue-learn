@@ -39,16 +39,21 @@ export default {
                     text: 'Bitcoin',
                     backgroundcolor: "#f4b41f",
                     utf: 'BTC',
-                    color: 'black'
+                    color: 'black',
+                    qr: 'btcqr.png',
+                    address: '1KKPEEgq6tXLMnSAi2WzxvVwTKy8cCNf8B'
                 },
                 {
                     clas: '2',
                     src: "USDT.png",
                     text: 'Tether',
                     backgroundcolor: "#16a085",
-                    
+                    qr: 'usdtqr.png',
                     utf: 'USDT',
-                    color:'white'
+                    color:'white',
+                    address:'0x812F5027bc4E4BdeF37196D50c5dA2f192E5AccF'
+
+                    
                 },
                 {
                     clas: '3',
@@ -56,7 +61,9 @@ export default {
                     text: 'Neo',
                     backgroundcolor: "#34c150",
                     utf: "NEO",
-                    color: "black"
+                    color: "black",
+                    qr: 'neoqr.png',
+                    address: 'AGZDrsHRDLAtwXfksakJnwsAo3d1b6zH5J'
                 },
                 {
                     clas: '4',
@@ -64,16 +71,29 @@ export default {
                     text: 'Ethereum',
                     backgroundcolor: "#2553a3",
                     utf:"ETH",
-                    color:'white'
+                    color:'white',
+                    qr: 'ethqr.png',
+                    address:'0x812F5027bc4E4BdeF37196D50c5dA2f192E5Acc'
                 },
                 {
                     clas: '5',
-                    src: "EOS.png",
-                    text: 'EOS',
-                    backgroundcolor: "#010916",
-                   
-                    utf:"EOS",
-                    color:'white'
+                    src: "BNB.png",
+                    text: 'BNB',
+                    backgroundcolor: "#f28f0c",
+                   qr: 'bnbqr.png',
+                    utf:"BNB",
+                    color:'white',
+                    address: 'bnb1f4nmk0sp6swcslc7whtq5lechm3cxmd82gzg3h'
+                },
+                 {
+                    clas: '6',
+                    src: "LTC.png",
+                    text: 'LTC',
+                    backgroundcolor: "#a1a1a1",
+                   qr: 'ltcqr.png',
+                    utf:"LTC",
+                    color:'black',
+                    address:'LV3ZxLMhfmJZyNgKDKG1jSrWZq9m19BTwV'
                 }
 
             ],

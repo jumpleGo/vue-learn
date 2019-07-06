@@ -1,6 +1,6 @@
 <template>
 <div>
-    <li @click="viewDetailsClicked" class="cryptoblock">
+    <li @click="viewDetailsClicked(); addToDataVuex()" class="cryptoblock">
         <img :src=getImgUrl(item1.src) alt="">
         <p>{{item1.text}}</p>
 
@@ -17,7 +17,9 @@ export default {
     props: ['item1'],
 
     data() {
-        return {}
+        return {
+         
+        }
     },
     methods: {
         getImgUrl(pic) {
@@ -25,6 +27,13 @@ export default {
         },
         viewDetailsClicked() {
             bus.$emit("viewData1", [this.item1.src, this.item1.text, this.item1.backgroundcolor])
+        },
+        addToDataVuex() {
+            var data = {
+                    src2: this.item1.src,
+                    text2: this.item1.text,
+                }
+                this.$store.dispatch('addDataRight', data)
         }
 
     }

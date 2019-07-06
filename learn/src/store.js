@@ -10,7 +10,15 @@ export default new Vuex.Store({
     cardnumbercrypto: " ",
     cardnumberbank: " ",
     name: "step2",
-    isblocked: false
+    isblocked: false,
+    src1: "",
+    src2: '',
+    text1: '',
+    text2: '',
+    utf: '',
+    qr:'',
+    address:''
+
 
   },
   mutations: {
@@ -23,11 +31,22 @@ export default new Vuex.Store({
         state.cardnumbercrypto = price.cardnumbercrypto,
         state.cardnumberbank = price.cardnumberbank
     },
-   EDIT_ISBLOCKED(state){
+    EDIT_ISBLOCKED(state) {
+      state.isblocked = true
+
+    },
+    ADD_TO_DATA_LEFT(state, data) {
+        state.src1 = data.src1,
+        state.text1 = data.text1,
+        state.utf = data.utf,
+        state.qr = data.qr,
+        state.address = data.address
+    },
+    ADD_TO_DATA_RIGHT(state, data){
+      state.src2 = data.src2,
+      state.text2 = data.text2
+    }
     
-       state.isblocked = true
-     
-   }
   },
   actions: {
     addPrice({
@@ -40,6 +59,16 @@ export default new Vuex.Store({
     }, path) {
       commit('EDIT_PATH', path)
     },
+    addDataLeft({
+      commit
+    }, data) {
+      commit('ADD_TO_DATA_LEFT', data)
+    },
+    addDataRight({
+      commit
+    }, data) {
+      commit('ADD_TO_DATA_RIGHT', data)
+    }
 
   },
   getters: {
@@ -49,8 +78,11 @@ export default new Vuex.Store({
     name(state) {
       return state.name
     },
-    isblocked(state){
+    isblocked(state) {
       return state.isblocked
+    },
+    orderdata(state) {
+      return state
     }
   }
 })

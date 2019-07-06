@@ -8,16 +8,16 @@
         <div class="pay_block_man_info">
 
             <div class="pay_block_man_info_pay">
-                <img class="pay_block_man_info_pay_imgbank" :src=getImgUrl(src1) alt="">
-                <span class="pay_block_man_info_pay_namebank">{{text}}</span>
+                <img class="pay_block_man_info_pay_imgbank" :src=getImgUrl(orderdata.src1) alt="">
+                <span class="pay_block_man_info_pay_namebank">{{orderdata.text1}}</span>
             </div>
             <div class="pay_block_man_info_data">
                 <span class="pay_block_man_info_data_card">Адрес: {{ price1.cardnumbercrypto}}</span>
-                <span class="pay_block_man_info_data_card">Сумма: {{ price1.giving}} {{utf}}</span>
+                <span class="pay_block_man_info_data_card">Сумма: {{ price1.giving}} {{orderdata.utf}}</span>
             </div>
             <div class="pay_block_man_info_pay">
-                <img class="pay_block_man_info_pay_imgbank" :src=getImgUrl(src2) alt="">
-                <span class="pay_block_man_info_pay_namebank">{{text2}}</span>
+                <img class="pay_block_man_info_pay_imgbank" :src=getImgUrl(orderdata.src2) alt="">
+                <span class="pay_block_man_info_pay_namebank">{{orderdata.text2}}</span>
             </div>
             <div class="pay_block_man_info_data">
                 <span class="pay_block_man_info_data_card">Карта: {{ price1.cardnumberbank}}</span>
@@ -35,40 +35,24 @@
 import {
     mapGetters
 } from 'vuex';
-import {
-    bus
-} from '../main';
+
 
 export default {
     data() {
         return {
-           src2:'',
-           src1:''
+          
         }
     },
     computed: {
         ...mapGetters([
             'price1',
+            'orderdata'
 
         ]),
         
-
     },
-   beforeCreate()  {
-        bus.$on('viewData', data => {
-            this.src1 = data[0];
-            this.text = data[1];
-            this.utf = data[3]
 
-        });
 
-        bus.$on('viewData1', data => {
-            this.src2 = data[0];
-            this.text2 = data[1];
-
-        });
-
-    },
     methods: {
         editpath() {
             this.$store.dispatch('editpath', 'step3');

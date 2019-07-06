@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import rightbl from './components/rightbl.vue'
 import step2 from './components/step2.vue'
 import step3 from './components/step3.vue'
+import step4 from './components/step4.vue'
 
 Vue.use(Router)
 
@@ -26,6 +27,12 @@ export default new Router({
       path: '/Step3',
       name: 'step3',
       component : step3,
+      props: true
+    },
+    {
+      path: '/Step4',
+      name: 'step4',
+      component : step4,
       props: true
     }
   ]
