@@ -179,12 +179,19 @@ methods:{
 
         axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,LTC,BNB,NEO,USDT&tsyms=RUB').then(response => {
                 this.coins = response.data;
-                console.log(response)
+                this.items[0].cost = this.coins.BTC.RUB,
+                this.items[1].cost = this.coins.USDT.RUB,
+                this.items[2].cost = this.coins.NEO.RUB,
+                this.items[3].cost = this.coins.ETH.RUB,
+                this.items[4].cost = this.coins.BNB.RUB,
+                this.items[5].cost = this.coins.LTC.RUB;
+                
             })
 
             .catch(e => {
                 this.errors.push(e)
             })
+            
 
     },
 
@@ -192,15 +199,7 @@ methods:{
         ...mapGetters([
             'isblocked'
         ]),
-        setzen: function () {
-            return this.items[0].cost = this.coins.BTC.RUB,
-                this.items[1].cost = this.coins.USDT.RUB,
-                this.items[2].cost = this.coins.NEO.RUB,
-                this.items[3].cost = this.coins.ETH.RUB,
-                this.items[4].cost = this.coins.BNB.RUB,
-                this.items[5].cost = this.coins.LTC.RUB;
-
-        }
+       
     }
 
 }
