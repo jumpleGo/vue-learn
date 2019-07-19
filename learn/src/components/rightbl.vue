@@ -6,44 +6,45 @@
             <div :style="{backgroundColor:backgroundcolor, color: color}" class="wallet">
                 <div class="top">
                     <img src="../assets/sim-card-chip.png" alt="">
-                    <img  :src=getImgUrl(src1) alt="">
+                    <img :src=getImgUrl(src1) alt="">
+                    
 
+                </div>
+                <div class="center">
+
+                    <p>Адрес кошелька</p>
+                    <input type="text" :style="{color:color}" v-model="cardnumbercrypto" placeholder="1NeJEFzY8PbVS9RvYPfDP93iqXxHjav791">
+
+                </div>
+                <div class="bottom">
+                    Cумма: <input type="text" :style="{color:color}" v-model="sellprice" placeholder="1.2"> {{utf}}
+
+                </div>
             </div>
-                    <div class="center">
+        </div>
+        <div class="bankchange">
+            <h2>Куда</h2>
 
-                        <p>Адрес кошелька</p>
-                        <input type="text" :style="{color:color}" v-model="cardnumbercrypto" placeholder="1NeJEFzY8PbVS9RvYPfDP93iqXxHjav791">
+            <div :style={background:backgroundcolor2} class="wallet">
+                <div class="top">
+                    <img src="../assets/sim-card-chip.png" alt="">
+                    <img :src=getImgUrl(src2) alt="">
+                </div>
+                <div class="center">
+                    <p>Номер карты</p>
+                    <input class="mask" type="text" v-model="cardnumberbank">
 
-                    </div>
-                        <div class="bottom">
-                            Cумма: <input type="text" :style="{color:color}"  v-model="sellprice" placeholder="1.2"> {{utf}}
+                </div>
+                <div class="bottom">
+                    Cумма: <input type="text" v-model="buyprice"> RUB
 
-                        </div>
-                        </div>
-                    </div>
-                    <div class="bankchange">
-                        <h2>Куда</h2>
+                </div>
+            </div>
+        </div>
+        <button class="btn" @click="bigmethod">Сохранить</button>
+    </div>
 
-                        <div :style={background:backgroundcolor2} class="wallet">
-                            <div class="top">
-                                <img src="../assets/sim-card-chip.png" alt="">
-                                <img :src=getImgUrl(src2) alt="">
-                            </div>
-                                <div class="center">
-                                    <p>Номер карты</p>
-                                    <input class="mask" type="text" v-model="cardnumberbank">
-
-                                </div>
-                                    <div class="bottom">
-                                        Cумма: <input type="text"    v-model="buyprice"> RUB
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <button class="btn" @click="bigmethod" >Сохранить</button>
-                            </div>
-
-                        </div>
+</div>
 </template>
 
 <script>
@@ -56,6 +57,7 @@ export default {
 
     data() {
         return {
+
             src1: 'BTC.png',
             text1: '',
             backgroundcolor: '#f4b41f',
@@ -63,11 +65,12 @@ export default {
             text2: '',
             backgroundcolor2: 'linear-gradient(135deg, rgb(26, 159, 41), rgb(13, 117, 24))',
             sellprice: '',
-            buyprice:'',
+            buyprice: '',
             cardnumberbank: " ",
             cardnumbercrypto: '',
             utf: 'BTC',
-            color:''
+            color: '',
+            cost: 0,
         }
 
     },
@@ -81,7 +84,8 @@ export default {
                 cardnumbercrypto: this.cardnumbercrypto,
                 cardnumberbank: this.cardnumberbank,
                 buyprice: this.buyprice,
-                sellprice: this.sellprice
+                sellprice: this.sellprice,
+
             }
             this.$store.dispatch('addPrice', obj);
 
@@ -100,17 +104,17 @@ export default {
         }
 
     },
-    computed: {
-
-    },
+  
 
     created() {
+
         bus.$on('viewData', data => {
             this.src1 = data[0];
             this.backgroundcolor = data[2];
             this.utf = data[3],
-            this.color = data[4]
-        });
+            this.color = data[4],
+            this.cost = data[6]
+        })
 
         bus.$on('viewData1', data => {
             this.src2 = data[0];
@@ -118,29 +122,32 @@ export default {
         });
 
     },
+
     watch: {
         sellprice: function (val) {
             this.sellprice = val;
-            this.buyprice = val * 700000;
+            this.buyprice = val * (this.cost*0.97);
         },
         buyprice: function (val) {
             this.buyprice = val;
-            this.sellprice = val / 700000;
+            this.sellprice = val / (this.cost * 0.97);
         }
     }
 }
 </script>
 
 <style lang="scss" scoped>
-input{
+input {
     background: rgba(0, 0, 0, 0.103);
     padding: 5px;
     border: none;
     outline: none;
 }
-input::placeholder{
+
+input::placeholder {
     color: rgba(0, 0, 0, 0.493);
 }
+
 .rightb {
     font-family: 'Hind Siliguri', sans-serif;
     padding: 10px 30px;
@@ -164,7 +171,6 @@ input::placeholder{
         justify-content: space-between;
 
         .wallet {
-           
 
             padding: 20px 20px;
             box-shadow: 0 2px 4px #c4c2c2;
@@ -191,7 +197,8 @@ input::placeholder{
             .bottom {
                 font-size: 19px;
                 text-align: left;
-                input{
+
+                input {
                     min-width: 20px;
                 }
             }
@@ -201,12 +208,14 @@ input::placeholder{
                 display: flex;
                 flex-direction: column;
                 text-align: left;
-                p{
+
+                p {
                     margin-top: 15px;
                     margin-bottom: 10px;
                 }
-                input{
-                   text-align: center;
+
+                input {
+                    text-align: center;
                 }
             }
         }
@@ -220,7 +229,6 @@ input::placeholder{
 
         .wallet {
             color: white;
-            
 
             padding: 20px 20px;
             box-shadow: 0 2px 4px #c4c2c2;
@@ -243,8 +251,9 @@ input::placeholder{
             .bottom {
                 font-size: 19px;
                 text-align: left;
-                input{
-                    color:white
+
+                input {
+                    color: white
                 }
             }
 
@@ -253,7 +262,8 @@ input::placeholder{
                 display: flex;
                 flex-direction: column;
                 text-align: left;
-                input{
+
+                input {
                     color: white;
                     font-size: 22px;
                 }

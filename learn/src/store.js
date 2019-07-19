@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    coins: Array,
     giving: 0,
     getting: 0,
     cardnumbercrypto: " ",
