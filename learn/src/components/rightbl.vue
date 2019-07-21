@@ -272,4 +272,130 @@ input::placeholder {
     }
 
 }
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .rightb {
+    font-family: 'Hind Siliguri', sans-serif;
+    padding: 10px 0px;
+    width: 100%;
+    background: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px #c4c2c2;
+    border-radius: 4px;
+
+    h2 {
+        font-size: 25px;
+        font-weight: 500;
+        color: black;
+    }
+
+    .cryptochange {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .wallet {
+
+            padding: 20px 10px;
+            box-shadow: 0 2px 4px #c4c2c2;
+            border-radius: 4px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+
+            input {
+                font-size: 17px;
+            }
+
+            .top {
+                img {
+                    width: 50px;
+                    height: 50px;
+                }
+
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .bottom {
+                font-size: 19px;
+                text-align: left;
+
+                input {
+                    min-width: 20px;
+                }
+            }
+
+            .center {
+                font-size: 19px;
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+
+                p {
+                    margin-top: 15px;
+                    margin-bottom: 10px;
+                }
+
+                input {
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    .bankchange {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .wallet {
+            color: white;
+
+            padding: 20px 10px;
+            box-shadow: 0 2px 4px #c4c2c2;
+            border-radius: 4px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+
+            .top {
+                img {
+                    width: 50px;
+                    height: 50px;
+                }
+
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .bottom {
+                font-size: 19px;
+                text-align: left;
+
+                input {
+                    color: white
+                }
+            }
+
+            .center {
+                font-size: 19px;
+                display: flex;
+                flex-direction: column;
+                text-align: left;
+
+                input {
+                    color: white;
+                    font-size: 22px;
+                }
+            }
+        }
+    }
+
+}
+}
 </style>

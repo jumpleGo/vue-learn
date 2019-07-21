@@ -310,4 +310,109 @@ ul {
         width: 50%;
     }
 }
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .hello {
+    background-image: url(../assets/bg3.png);
+    padding: 20px 3%;
+}
+
+.blocked {
+    &:after {
+        margin-top: 20px;
+        margin-left: 4.3%;
+        content: '';
+        display: block;
+        top: 0%;
+        left: 0%;
+        background-color: rgba(83, 83, 83, 0.048);
+        height: 73%;
+        width: 92%;
+        position: absolute;
+        z-index: 1;
+
+    }
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+.tarifs {
+    width: 100%;
+    background: white;
+    padding: 0px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0 2px 4px #c4c2c2;
+    border-radius: 4px;
+    margin-top: 20px;
+    .items{
+        width: 85%;
+    }
+    .images{
+        display: flex;
+        flex-direction: column;
+        img{
+            padding: 5px;
+            padding-left: 10px;
+            width: 30px;
+            height: 30px;
+        }
+    }
+    .tarif_item{
+        border-bottom: 1px solid rgba(119, 119, 119, 0.082);
+        padding: 10px;
+        padding-left: 40px;
+        font-size: 14px;
+       text-align: left;
+       width: calc(100% - 40px);
+       margin: 0;
+       span{
+           float: right;
+       }
+    }
+}
+
+.leftb {
+
+    width: 100%;
+    background: white;
+    padding: 0px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0 2px 4px #c4c2c2;
+    border-radius: 4px;
+
+    .firstb {
+        h2 {
+            padding: 15px 10px;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            color: #000000;
+        }
+
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+
+    .secondb {
+        h2 {
+            padding: 15px 10px;
+            font-family: 'Ubuntu', sans-serif;
+            font-weight: 500;
+            font-size: 18px;
+            color: #000000;
+        }
+
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+}
+}
 </style>
