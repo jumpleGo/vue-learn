@@ -1,36 +1,36 @@
 <template>
-<div class="hello">
-    <div class="leftb">
+<div class="select-crypto-block">
+    <div class="select-crypto-block__transfer">
 
-        <div class="firstb" :class="{ blocked : isblocked} ">
-            <h2>1. Отдаете</h2>
+        <div class="select-crypto-block__transfer_give-get" :class="{ blocked : isblocked} ">
+            <h2 class="heading">1. Отдаете</h2>
             <Item v-for='item of items' :key="item.clas" :item="item"></Item>
         </div>
 
-        <div class="secondb">
-            <h2>2. Получаете</h2>
+        <div class="select-crypto-block__transfer_give-get">
+            <h2 class="heading">2. Получаете</h2>
             <Item2 v-for='item1 of items1' :key="item1.class" :item1="item1"></Item2>
 
         </div>
 
     </div>
-    <div class="tarifs">
-        
-            <div class="images">
-                <img :src=getImgUrl(items[0].src) alt="">
-                <img :src=getImgUrl(items[3].src) alt="">
-                <img :src=getImgUrl(items[5].src) alt="">
-                <img :src=getImgUrl(items[4].src) alt="">
-                <img :src=getImgUrl(items[2].src) alt="">
-                <img :src=getImgUrl(items[1].src) alt="">
+    <div class="select-crypto-block__tarifs">
 
-            </div>
-           <div class="items">
-                <p class="tarif_item" v-for="(object, index) in coins" :key="index">
-                {{index}} <span v-for="(value, index) in object" :key="index">{{value * 0.97}} ₽</span>
+        <div class="images">
+            <img :src=getImgUrl(items[0].src) alt="">
+            <img :src=getImgUrl(items[3].src) alt="">
+            <img :src=getImgUrl(items[5].src) alt="">
+            <img :src=getImgUrl(items[4].src) alt="">
+            <img :src=getImgUrl(items[2].src) alt="">
+            <img :src=getImgUrl(items[1].src) alt="">
+
+        </div>
+        <div class="items">
+            <p class="tarif_item" v-for="(object, index) in coins" :key="index">
+                {{index}} <span v-for="(value, index) in object" :key="index">{{value * PERCENT}} ₽</span>
             </p>
-           </div>
-        
+        </div>
+
     </div>
 
 </div>
@@ -53,6 +53,7 @@ export default {
 
     data() {
         return {
+            PERCENT : 0.97,
             coins: Array,
             errors: [],
 
@@ -170,28 +171,27 @@ export default {
             ]
         }
     },
-methods:{
- getImgUrl(pic) {
+    methods: {
+        getImgUrl(pic) {
             return require('../assets/' + pic);
         },
-},
+    },
     created() {
 
         axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,LTC,BNB,NEO,USDT&tsyms=RUB').then(response => {
                 this.coins = response.data;
                 this.items[0].cost = this.coins.BTC.RUB,
-                this.items[1].cost = this.coins.USDT.RUB,
-                this.items[2].cost = this.coins.NEO.RUB,
-                this.items[3].cost = this.coins.ETH.RUB,
-                this.items[4].cost = this.coins.BNB.RUB,
-                this.items[5].cost = this.coins.LTC.RUB;
-                
+                    this.items[1].cost = this.coins.USDT.RUB,
+                    this.items[2].cost = this.coins.NEO.RUB,
+                    this.items[3].cost = this.coins.ETH.RUB,
+                    this.items[4].cost = this.coins.BNB.RUB,
+                    this.items[5].cost = this.coins.LTC.RUB;
+
             })
 
             .catch(e => {
                 this.errors.push(e)
             })
-            
 
     },
 
@@ -199,7 +199,7 @@ methods:{
         ...mapGetters([
             'isblocked'
         ]),
-       
+
     }
 
 }
@@ -208,22 +208,88 @@ methods:{
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style lang="scss" scoped>
-.hello {
+.select-crypto-block {
     background-image: url(../assets/bg3.png);
     padding: 20px 3%;
+
+    &__transfer {
+        position: relative;
+        width: 90%;
+        background: white;
+        padding: 0px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: row;
+        box-shadow: 0 2px 4px #c4c2c2;
+        border-radius: 4px;
+
+        &_give-get {
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+
+            .heading {
+                padding: 15px 10px;
+                font-family: 'Ubuntu', sans-serif;
+                font-weight: 500;
+                font-size: 18px;
+                color: #000000;
+            }
+        }
+
+    }
+
+    &__tarifs {
+        width: 90%;
+        background: white;
+        padding: 0px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: row;
+        box-shadow: 0 2px 4px #c4c2c2;
+        border-radius: 4px;
+        margin-top: 20px;
+
+        .items {
+            width: 88%;
+        }
+
+        .images {
+            display: flex;
+            flex-direction: column;
+
+            img {
+                padding: 5px;
+                padding-left: 10px;
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        .tarif_item {
+            border-bottom: 1px solid rgba(119, 119, 119, 0.082);
+            padding: 10px;
+            padding-left: 40px;
+            text-align: left;
+            width: calc(100% - 40px);
+            margin: 0;
+
+            span {
+                float: right;
+            }
+        }
+    }
 }
 
 .blocked {
     &:after {
-        margin-top: 20px;
-        margin-left: 4.4%;
         content: '';
         display: block;
         top: 0%;
         left: 0%;
         background-color: rgba(83, 83, 83, 0.048);
-        height: 58%;
-        width: 39.5%;
+        height: 100%;
+        width: 100%;
         position: absolute;
         z-index: 1;
 
@@ -235,184 +301,114 @@ ul {
     margin: 0;
 }
 
-.tarifs {
-    width: 90%;
-    background: white;
-    padding: 0px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: row;
-    box-shadow: 0 2px 4px #c4c2c2;
-    border-radius: 4px;
-    margin-top: 20px;
-    .items{
-        width: 88%;
-    }
-    .images{
-        display: flex;
-        flex-direction: column;
-        img{
-            padding: 5px;
-            padding-left: 10px;
-            width: 30px;
-            height: 30px;
-        }
-    }
-    .tarif_item{
-        border-bottom: 1px solid rgba(119, 119, 119, 0.082);
-        padding: 10px;
-        padding-left: 40px;
-       text-align: left;
-       width: calc(100% - 40px);
-       margin: 0;
-       span{
-           float: right;
-       }
-    }
-}
-
-.leftb {
-
-    width: 90%;
-    background: white;
-    padding: 0px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: row;
-    box-shadow: 0 2px 4px #c4c2c2;
-    border-radius: 4px;
-
-    .firstb {
-        h2 {
-            padding: 15px 10px;
-            font-family: 'Ubuntu', sans-serif;
-            font-weight: 500;
-            font-size: 18px;
-            color: #000000;
-        }
-
-        display: flex;
-        flex-direction: column;
-        width: 50%;
-    }
-
-    .secondb {
-        h2 {
-            padding: 15px 10px;
-            font-family: 'Ubuntu', sans-serif;
-            font-weight: 500;
-            font-size: 18px;
-            color: #000000;
-        }
-
-        display: flex;
-        flex-direction: column;
-        width: 50%;
-    }
-}
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
     .hello {
-    background-image: url(../assets/bg3.png);
-    padding: 20px 3%;
-}
+        background-image: url(../assets/bg3.png);
+        padding: 20px 3%;
+    }
 
-.blocked {
-    &:after {
+    .blocked {
+        &:after {
+            margin-top: 20px;
+            margin-left: 4.3%;
+            content: '';
+            display: block;
+            top: 0%;
+            left: 0%;
+            background-color: rgba(83, 83, 83, 0.048);
+            height: 73%;
+            width: 92%;
+            position: absolute;
+            z-index: 1;
+
+        }
+    }
+
+    ul {
+        padding: 0;
+        margin: 0;
+    }
+
+    .tarifs {
+        width: 100%;
+        background: white;
+        padding: 0px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: row;
+        box-shadow: 0 2px 4px #c4c2c2;
+        border-radius: 4px;
         margin-top: 20px;
-        margin-left: 4.3%;
-        content: '';
-        display: block;
-        top: 0%;
-        left: 0%;
-        background-color: rgba(83, 83, 83, 0.048);
-        height: 73%;
-        width: 92%;
-        position: absolute;
-        z-index: 1;
 
-    }
-}
-
-ul {
-    padding: 0;
-    margin: 0;
-}
-
-.tarifs {
-    width: 100%;
-    background: white;
-    padding: 0px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: row;
-    box-shadow: 0 2px 4px #c4c2c2;
-    border-radius: 4px;
-    margin-top: 20px;
-    .items{
-        width: 85%;
-    }
-    .images{
-        display: flex;
-        flex-direction: column;
-        img{
-            padding: 5px;
-            padding-left: 10px;
-            width: 30px;
-            height: 30px;
-        }
-    }
-    .tarif_item{
-        border-bottom: 1px solid rgba(119, 119, 119, 0.082);
-        padding: 10px;
-        padding-left: 40px;
-        font-size: 14px;
-       text-align: left;
-       width: calc(100% - 40px);
-       margin: 0;
-       span{
-           float: right;
-       }
-    }
-}
-
-.leftb {
-
-    width: 100%;
-    background: white;
-    padding: 0px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: row;
-    box-shadow: 0 2px 4px #c4c2c2;
-    border-radius: 4px;
-
-    .firstb {
-        h2 {
-            padding: 15px 10px;
-            font-family: 'Ubuntu', sans-serif;
-            font-weight: 500;
-            font-size: 18px;
-            color: #000000;
+        .items {
+            width: 85%;
         }
 
-        display: flex;
-        flex-direction: column;
-        width: 50%;
-    }
+        .images {
+            display: flex;
+            flex-direction: column;
 
-    .secondb {
-        h2 {
-            padding: 15px 10px;
-            font-family: 'Ubuntu', sans-serif;
-            font-weight: 500;
-            font-size: 18px;
-            color: #000000;
+            img {
+                padding: 5px;
+                padding-left: 10px;
+                width: 30px;
+                height: 30px;
+            }
         }
 
-        display: flex;
-        flex-direction: column;
-        width: 50%;
+        .tarif_item {
+            border-bottom: 1px solid rgba(119, 119, 119, 0.082);
+            padding: 10px;
+            padding-left: 40px;
+            font-size: 14px;
+            text-align: left;
+            width: calc(100% - 40px);
+            margin: 0;
+
+            span {
+                float: right;
+            }
+        }
     }
-}
+
+    .leftb {
+
+        width: 100%;
+        background: white;
+        padding: 0px;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: row;
+        box-shadow: 0 2px 4px #c4c2c2;
+        border-radius: 4px;
+
+        .firstb {
+            h2 {
+                padding: 15px 10px;
+                font-family: 'Ubuntu', sans-serif;
+                font-weight: 500;
+                font-size: 18px;
+                color: #000000;
+            }
+
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+
+        .secondb {
+            h2 {
+                padding: 15px 10px;
+                font-family: 'Ubuntu', sans-serif;
+                font-weight: 500;
+                font-size: 18px;
+                color: #000000;
+            }
+
+            display: flex;
+            flex-direction: column;
+            width: 50%;
+        }
+    }
 }
 </style>

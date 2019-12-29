@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import rightbl from './components/rightbl.vue'
+import CalculateBlock from './components/CalculateBlock.vue'
 import step2 from './components/step2.vue'
 import step3 from './components/step3.vue'
 import step4 from './components/step4.vue'
@@ -13,8 +13,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Rightbl',
-      component: rightbl,
+      name: 'CalculateBlock',
+      component: CalculateBlock,
       props: true
     },
     {
