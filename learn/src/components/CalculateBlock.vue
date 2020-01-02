@@ -53,7 +53,7 @@ import {
 } from '../main';
 
 export default {
-    name: 'Rightbl',
+    name: 'CalculateBlock',
 
     data() {
         return {

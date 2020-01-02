@@ -4,17 +4,17 @@
 
         <div class="select-crypto-block__transfer_give-get" :class="{ blocked : isblocked} ">
             <h2 class="heading">1. Отдаете</h2>
-            <Item v-for='item of items' :key="item.clas" :item="item"></Item>
+            <give-item v-for='crypto of cryptos' :key="crypto.id" :crypto="crypto"></give-item>
         </div>
 
         <div class="select-crypto-block__transfer_give-get">
             <h2 class="heading">2. Получаете</h2>
-            <Item2 v-for='item1 of items1' :key="item1.class" :item1="item1"></Item2>
+            <get-item v-for='bank of banks' :key="bank.class" :bank="bank"></get-item>
 
         </div>
 
     </div>
-    <div class="select-crypto-block__tarifs">
+    <!-- <div class="select-crypto-block__tarifs">
 
         <div class="images">
             <img :src=getImgUrl(items[0].src) alt="">
@@ -25,29 +25,29 @@
             <img :src=getImgUrl(items[1].src) alt="">
 
         </div>
-        <div class="items">
+         <div class="items">
             <p class="tarif_item" v-for="(object, index) in coins" :key="index">
                 {{index}} <span v-for="(value, index) in object" :key="index">{{value * PERCENT}} ₽</span>
             </p>
-        </div>
+        </div> 
 
-    </div>
+    </div> -->
 
 </div>
 </template>
 
 <script>
 import axios from 'axios';
-import Item from './item.vue';
-import Item2 from './item2.vue';
+import GetItem from '@/components/GetItem.vue';
+import GiveItem from '@/components/GiveItem.vue'
 import {
     mapGetters
 } from 'vuex';
 
 export default {
     components: {
-        Item,
-        Item2
+        GiveItem,
+        GetItem
     },
     name: 'Leftbl',
 
@@ -57,8 +57,8 @@ export default {
             coins: Array,
             errors: [],
 
-            items: [{
-                    clas: '1',
+            cryptos: [{
+                    id: '1',
                     src: "BTC.png",
                     text: 'Bitcoin',
                     backgroundcolor: "#f4b41f",
@@ -70,7 +70,7 @@ export default {
 
                 },
                 {
-                    clas: '2',
+                    id: '2',
                     src: "USDT.png",
                     text: 'Tether',
                     backgroundcolor: "#16a085",
@@ -82,7 +82,7 @@ export default {
 
                 },
                 {
-                    clas: '3',
+                    id: '3',
                     src: "GAS.png",
                     text: 'Neo',
                     backgroundcolor: "#34c150",
@@ -93,7 +93,7 @@ export default {
                     cost: Number
                 },
                 {
-                    clas: '4',
+                    id: '4',
                     src: "ETH.png",
                     text: 'Ethereum',
                     backgroundcolor: "#2553a3",
@@ -104,7 +104,7 @@ export default {
                     cost: Number
                 },
                 {
-                    clas: '5',
+                    id: '5',
                     src: "BNB.png",
                     text: 'BNB',
                     backgroundcolor: "#f28f0c",
@@ -115,7 +115,7 @@ export default {
                     cost: Number
                 },
                 {
-                    clas: '6',
+                    id: '6',
                     src: "LTC.png",
                     text: 'LTC',
                     backgroundcolor: "#a1a1a1",
@@ -128,41 +128,41 @@ export default {
 
             ],
 
-            items1: [{
-                    class: '1',
+            banks: [{
+                    id: '1',
                     src: "Advcash.png",
                     text: 'Advcash',
                     backgroundcolor: "linear-gradient(135deg, rgb(26, 159, 41), rgb(13, 117, 24))",
                 },
                 {
-                    class: '2',
+                    id: '2',
                     src: "Alfabank.png",
                     text: 'Alfabank',
                     backgroundcolor: 'linear-gradient(to right, #f00000, #dc281e)'
                 },
 
                 {
-                    class: '4',
+                    id: '4',
                     src: "Paypal.png",
                     text: 'Paypal',
                     backgroundcolor: 'linear-gradient(to right, #0052d4, #0052d4, #0052d4)'
                 },
 
                 {
-                    class: '7',
+                    id: '7',
                     src: "Qiwi.png",
                     text: 'Qiwi RUB',
                     backgroundcolor: 'linear-gradient(to right, #ffb75e, #ed8f03)'
                 },
                 {
-                    class: '8',
+                    id: '8',
                     src: "Sberbank.png",
                     text: 'Sberbank RUB',
                     backgroundcolor: '#046A38'
                 },
 
                 {
-                    class: '10',
+                    id: '10',
                     src: "Tinkoff.png",
                     text: 'Tinkoff RUB',
                     backgroundcolor: 'linear-gradient(to right, #283048, #859398)'

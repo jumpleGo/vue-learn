@@ -1,19 +1,18 @@
 <template>
 <section class="">
-    <div class="top_block">
-        <div class="top_block_main_title">Проверьте ваши данные</div>
-        
+    <div class="check-users-data">
+        <h2 class="check-users-data__title">Проверьте ваши данные</h2>
     </div>
-    <div class="pay_block">
-        <div class="pay_block_man_info">
+   
+        <div class="check-users-data__info">
 
-            <div class="pay_block_man_info_pay">
-                <img class="pay_block_man_info_pay_imgbank" :src=getImgUrl(orderdata.src1) alt="">
-                <span class="pay_block_man_info_pay_namebank">{{orderdata.text1}}</span>
+            <div class="check-users-data__info-crypt">
+                <img class="check-users-data__info-crypt--logo" :src=getImgUrl(orderdata.src1) alt="">
+                <span class="check-users-data__info-crypt--name">{{orderdata.text1}}</span>
             </div>
-            <div class="pay_block_man_info_data">
-                <span class="pay_block_man_info_data_card">Адрес: {{ price1.cardnumbercrypto}}</span>
-                <span class="pay_block_man_info_data_card">Сумма: {{ price1.giving}} {{orderdata.utf}}</span>
+            <div class="check-users-data__info-data">
+                <span class="check-users-data__info-data--adress">Адрес: {{ price1.cardnumbercrypto}}</span>
+                <span class="check-users-data__info-data--sum">Сумма: {{ price1.giving}} {{orderdata.utf}}</span>
             </div>
             <div class="pay_block_man_info_pay">
                 <img class="pay_block_man_info_pay_imgbank" :src=getImgUrl(orderdata.src2) alt="">
@@ -26,7 +25,7 @@
             <button @click="editpath(); timer(); " class="btn">Все верно</button>
         </div>
 
-    </div>
+  
 
 </section>
 </template>
@@ -108,28 +107,25 @@ section {
 
     flex-direction: column;
 
-    .top_block {
+    .check-users-data {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
 
-        &_main_title {
+        &__title {
             padding-left: 10px;
             font-size: 25px;
             color: black;
             font-weight: bold;
         }
 
-    }
-
-    .pay_block {
+        &__info {
         margin-bottom: 5%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
 
-        &_man_info {
-
+        &-crypt {
             padding: 5px;
             width: 100%;
             text-align: left;
@@ -179,5 +175,9 @@ section {
 
         }
     }
+
+    }
+
+   
 }
 </style>

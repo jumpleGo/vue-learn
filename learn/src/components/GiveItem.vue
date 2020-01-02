@@ -1,48 +1,44 @@
 <template>
 <div>
-    <li @click="viewDetailsClicked(); addToDataVuex()" class="cryptoblock">
-        <img :src=getImgUrl(item1.src) alt="">
-        <p>{{item1.text}}</p>
+    <li @click="viewDetailsClicked(); addToDataVuex()"  class="give-item__banking">
+        <img class="give-item__banking--img" :src=getImgUrl(crypto.src) alt="">
+        <p class="give-item__banking--name">{{crypto.text}}</p>
 
     </li>
 </div>
 </template>
 
 <script>
-import {
-    bus
-} from '../main';
 export default {
-
-    props: ['item1'],
-
+    props: ['crypto'],
     data() {
         return {
-         
+          data_object: {
+                src1: this.crypto.src,
+                text1: this.crypto.text,
+                utf: this.crypto.utf,
+                qr: this.crypto.qr,
+                address: this.crypto.address
+          }
         }
     },
     methods: {
         getImgUrl(pic) {
-            return require('../assets/' + pic);
-        },
-        viewDetailsClicked() {
-            bus.$emit("viewData1", [this.item1.src, this.item1.text, this.item1.backgroundcolor])
+            return require('@/assets/' + pic);
         },
         addToDataVuex() {
-            var data = {
-                    src2: this.item1.src,
-                    text2: this.item1.text,
-                }
-                this.$store.dispatch('addDataRight', data)
+                this.$store.dispatch('addDataLeft', this.data_object)
         }
+       
+        
 
-    }
+    },
+    
 }
 </script>
 
 <style lang="scss" scoped>
-.cryptoblock {
-
+.give-item__banking {
     font-family: 'Hind Siliguri', sans-serif;
     display: flex;
     flex-direction: row;
@@ -50,13 +46,13 @@ export default {
     align-items: center;
     border: 1px solid rgba(207, 207, 207, 0.356);
 
-    img {
+    &--img {
         margin-left: 20px;
         width: 30px;
         height: 30px;
     }
 
-    p {
+    &--name {
         font-size: 16px;
         margin-left: 30px;
     }
@@ -66,5 +62,6 @@ export default {
         transition: 0.3s;
         cursor: pointer;
     }
+    
 }
 </style>
