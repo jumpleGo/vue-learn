@@ -1,14 +1,17 @@
 <template>
 <div>
-    <li @click="viewDetailsClicked(); addToDataVuex()"  class="give-item__banking">
-        <img class="give-item__banking--img" :src=getImgUrl(crypto.src) alt="">
-        <p class="give-item__banking--name">{{crypto.text}}</p>
+    <li @click="viewDetailsClicked(); addToDataVuex()"  class="give-item__crypto">
+        <img class="give-item__crypto--img" :src=getImgUrl(crypto.src) alt="">
+        <p class="give-item__crypto--name">{{crypto.text}}</p>
 
     </li>
 </div>
 </template>
 
 <script>
+import {
+    bus
+} from '../main';
 export default {
     props: ['crypto'],
     data() {
@@ -26,19 +29,20 @@ export default {
         getImgUrl(pic) {
             return require('@/assets/' + pic);
         },
-        addToDataVuex() {
-                this.$store.dispatch('addDataLeft', this.data_object)
-        }
-       
-        
 
+        addToDataVuex() {
+            this.$store.dispatch('addDataLeft', this.data_object)
+        },
+
+        viewDetailsClicked() {
+            bus.$emit("cryptoData", [this.crypto.src, this.crypto.text, this.crypto.backgroundcolor, this.crypto.utf, this.crypto.color, this.crypto.address, this.crypto.cost])
+        },
     },
-    
 }
 </script>
 
 <style lang="scss" scoped>
-.give-item__banking {
+.give-item__crypto {
     font-family: 'Hind Siliguri', sans-serif;
     display: flex;
     flex-direction: row;

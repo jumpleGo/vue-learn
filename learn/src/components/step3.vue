@@ -13,7 +13,7 @@
             </div>
             <div class="pay_block_man_info_data">
                 <span class="pay_block_man_info_data_card">Адрес: {{orderdata.address}}</span>
-                <span class="pay_block_man_info_data_card">Сумма: {{ price1.giving}} {{orderdata.utf}}</span>
+                <span class="pay_block_man_info_data_card">Сумма: {{ orderdata.giving}} {{orderdata.utf}}</span>
             </div>
 
         </div>
@@ -32,14 +32,8 @@ import {
 } from 'vuex';
 
 export default {
-    data() {
-        return {
-
-        }
-    },
     computed: {
         ...mapGetters([
-            'price1',
             'orderdata'
         ])
     },

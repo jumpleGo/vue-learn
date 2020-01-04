@@ -13,7 +13,7 @@
                 <div class="center">
 
                     <p>Адрес кошелька</p>
-                    <input type="text" :style="{color:color}" v-model="cardnumbercrypto" placeholder="1NeJEFzY8PbVS9RvYPfDP93iqXxHjav791">
+                    <input type="text" :style="{color:color}"  v-model="cardnumbercrypto" placeholder="1NeJEFzY8PbVS9RvYPfDP93iqXxHjav791">
 
                 </div>
                 <div class="bottom">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="center">
                     <p>Номер карты</p>
-                    <input class="mask" type="text" v-model="cardnumberbank">
+                    <input class="mask"  v-mask="'#### #### #### ####'" type="text" v-model="cardnumberbank">
 
                 </div>
                 <div class="bottom">
@@ -41,39 +41,45 @@
                 </div>
             </div>
         </div>
-        <button class="btn" @click="bigmethod">Сохранить</button>
+        <button class="btn" @click="nextStep()">Сохранить</button>
     </div>
 
 </div>
 </template>
 
 <script>
-import {
-    bus
-} from '../main';
 
+import {bus} from '../main';
+import { required, between } from 'vuelidate/lib/validators'
 export default {
     name: 'CalculateBlock',
 
     data() {
         return {
-
-            src1: 'BTC.png',
+            src1:  this.src1 ? this.src1 : 'BTC.png',
             text1: '',
-            backgroundcolor: '#f4b41f',
-            src2: 'Advcash.png',
+            backgroundcolor:  this.backgroundcolor ? this.backgroundcolor : '#f4b41f',
+            src2: this.src2 ? this.src2 : 'Advcash.png',
             text2: '',
-            backgroundcolor2: 'linear-gradient(135deg, rgb(26, 159, 41), rgb(13, 117, 24))',
+            backgroundcolor2: this.backgroundcolor2 ? this.backgroundcolor2 : 'linear-gradient(135deg, rgb(26, 159, 41), rgb(13, 117, 24))',
             sellprice: '',
             buyprice: '',
             cardnumberbank: " ",
             cardnumbercrypto: '',
-            utf: 'BTC',
+            utf:  this.src1 ? this.src1 : 'BTC',
             color: '',
-            cost: 0,
+            cost:  this.cost? this.cost : 0,
+            min: '',
+            max: ''
         }
 
     },
+    validations: {
+    cardnumberbank: {
+      required,
+    },
+   
+  },
 
     methods: {
         getImgUrl(pic) {
@@ -97,7 +103,7 @@ export default {
         editpath() {
             this.$store.dispatch('editpath', 'step2');
         },
-        bigmethod() {
+        nextStep() {
             this.editisblocked();
             this.addPrice();
             this.editpath()
@@ -107,8 +113,7 @@ export default {
   
 
     created() {
-
-        bus.$on('viewData', data => {
+        bus.$on('cryptoData', data => {
             this.src1 = data[0];
             this.backgroundcolor = data[2];
             this.utf = data[3],
@@ -116,7 +121,7 @@ export default {
             this.cost = data[6]
         })
 
-        bus.$on('viewData1', data => {
+        bus.$on('bankData', data => {
             this.src2 = data[0];
             this.backgroundcolor2 = data[2]
         });

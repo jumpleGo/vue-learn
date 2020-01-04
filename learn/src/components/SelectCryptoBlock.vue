@@ -9,7 +9,7 @@
 
         <div class="select-crypto-block__transfer_give-get">
             <h2 class="heading">2. Получаете</h2>
-            <get-item v-for='bank of banks' :key="bank.class" :bank="bank"></get-item>
+            <get-item v-for='bank of banks' :key="bank.id" :bank="bank"></get-item>
 
         </div>
 
@@ -53,7 +53,7 @@ export default {
 
     data() {
         return {
-            PERCENT : 0.97,
+            // PERCENT : 0.97,
             coins: Array,
             errors: [],
 
@@ -180,12 +180,12 @@ export default {
 
         axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,LTC,BNB,NEO,USDT&tsyms=RUB').then(response => {
                 this.coins = response.data;
-                this.items[0].cost = this.coins.BTC.RUB,
-                    this.items[1].cost = this.coins.USDT.RUB,
-                    this.items[2].cost = this.coins.NEO.RUB,
-                    this.items[3].cost = this.coins.ETH.RUB,
-                    this.items[4].cost = this.coins.BNB.RUB,
-                    this.items[5].cost = this.coins.LTC.RUB;
+                this.cryptos[0].cost = this.coins.BTC.RUB,
+                this.cryptos[1].cost = this.coins.USDT.RUB,
+                this.cryptos[2].cost = this.coins.NEO.RUB,
+                this.cryptos[3].cost = this.coins.ETH.RUB,
+                this.cryptos[4].cost = this.coins.BNB.RUB,
+                this.cryptos[5].cost = this.coins.LTC.RUB;
 
             })
 

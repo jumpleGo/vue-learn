@@ -1,8 +1,8 @@
 <template>
 <div>
-    <li @click="viewDetailsClicked(); addToDataVuex()" class="get-item__cryptoblock">
-        <img class="get-item__cryptoblock--img" :src=getImgUrl(bank.src) alt="">
-        <p class=get-item__cryptoblock--name>{{bank.text}}</p>
+    <li @click="viewDetailsClicked(); addToDataVuex()" class="get-item__bank">
+        <img class="get-item__bank--img" :src=getImgUrl(bank.src) alt="">
+        <p class=get-item__bank--name>{{bank.text}}</p>
 
     </li>
 </div>
@@ -20,14 +20,14 @@ export default {
             return require('@/assets/' + pic);
         },
         viewDetailsClicked() {
-            bus.$emit("viewData1", [this.bank.src, this.bank.text, this.bank.backgroundcolor])
+            bus.$emit("bankData", [this.bank.src, this.bank.text, this.bank.backgroundcolor])
         },
         addToDataVuex() {
             var data = {
-                    src2: this.bank.src,
-                    text2: this.bank.text,
-                }
-                this.$store.dispatch('addDataRight', data)
+                src2: this.bank.src,
+                text2: this.bank.text,
+            }
+            this.$store.dispatch('addDataRight', data)
         }
 
     }
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.get-item__cryptoblock {
+.get-item__bank {
 
     font-family: 'Hind Siliguri', sans-serif;
     display: flex;
