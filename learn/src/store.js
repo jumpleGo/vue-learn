@@ -73,9 +73,6 @@ export default new Vuex.Store({
 
   },
   getters: {
-    price1(state) {
-      return state
-    },
     name(state) {
       return state.name
     },

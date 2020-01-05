@@ -1,64 +1,65 @@
 <template>
-<div class="hello">
-    <div class="rightb">
-        <div class="cryptochange">
-            <h2>Откуда</h2>
-            <div :style="{backgroundColor:backgroundcolor, color: color}" class="wallet">
-                <div class="top">
-                    <img src="../assets/sim-card-chip.png" alt="">
-                    <img :src=getImgUrl(src1) alt="">
-                    
+<div class="calculate-block">
+    <div class="calculate-block__cryptochange">
+        <h2 clas="calculate-block__cryptochange--heading">Откуда</h2>
+        <div :style="{backgroundColor:backgroundcolor, color: color}" class="calculate-block__cryptochange-wallet">
+            <div class="calculate-block__cryptochange-wallet-top">
+                <img src="../assets/sim-card-chip.png" alt="">
+                <img :src=getImgUrl(src1) alt="">
 
-                </div>
-                <div class="center">
-
-                    <p>Адрес кошелька</p>
-                    <input type="text" :style="{color:color}"  v-model="cardnumbercrypto" placeholder="1NeJEFzY8PbVS9RvYPfDP93iqXxHjav791">
-
-                </div>
-                <div class="bottom">
-                    Cумма: <input type="text" :style="{color:color}" v-model="sellprice" placeholder="1.2"> {{utf}}
-
-                </div>
             </div>
-        </div>
-        <div class="bankchange">
-            <h2>Куда</h2>
+            <div class="calculate-block__cryptochange-wallet-center">
 
-            <div :style={background:backgroundcolor2} class="wallet">
-                <div class="top">
-                    <img src="../assets/sim-card-chip.png" alt="">
-                    <img :src=getImgUrl(src2) alt="">
-                </div>
-                <div class="center">
-                    <p>Номер карты</p>
-                    <input class="mask"  v-mask="'#### #### #### ####'" type="text" v-model="cardnumberbank">
+                <p>Адрес кошелька</p>
+                <input type="text" :style="{color:color}" v-model="cardnumbercrypto" placeholder="1NeJEFzY8PbVS9RvYPfDP93iqXxHjav791">
 
-                </div>
-                <div class="bottom">
-                    Cумма: <input type="text" v-model="buyprice"> RUB
-
-                </div>
             </div>
+            <div class="calculate-block__cryptochange-wallet-bottom">
+                Cумма: <input @blur="checkSellprice()" type="text" :style="{color:color}" v-model="sellprice"> {{utf}}
+
+            </div>
+            <span class="error" v-if="error">min: {{min}}, max: {{max}}</span>
         </div>
-        <button class="btn" @click="nextStep()">Сохранить</button>
     </div>
+    <div class="calculate-block__bankchange">
+        <h2 class="calculate-block__bankchange--heading">Куда</h2>
 
+        <div :style="{background:backgroundcolor2}" class="calculate-block__bankchange-wallet">
+            <div class="calculate-block__bankchange-wallet-top">
+                <img src="../assets/sim-card-chip.png" alt="">
+                <img :src=getImgUrl(src2) alt="">
+            </div>
+            <div class="calculate-block__bankchange-wallet-center">
+                <p>Номер карты</p>
+                <input class="mask" v-mask="'#### #### #### ####'" type="text" v-model="cardnumberbank">
+
+            </div>
+            <div class="calculate-block__bankchange-wallet-bottom">
+                Cумма: <input type="text" v-model="buyprice"> RUB
+
+            </div>
+        </div>
+    </div>
+    <button class="btn" @click="nextStep()">Сохранить</button>
 </div>
 </template>
 
 <script>
-
-import {bus} from '../main';
-import { required, between } from 'vuelidate/lib/validators'
+import {
+    bus
+} from '../main';
+import {
+    required,
+    between
+} from 'vuelidate/lib/validators'
 export default {
     name: 'CalculateBlock',
 
     data() {
         return {
-            src1:  this.src1 ? this.src1 : 'BTC.png',
+            src1: this.src1 ? this.src1 : 'BTC.png',
             text1: '',
-            backgroundcolor:  this.backgroundcolor ? this.backgroundcolor : '#f4b41f',
+            backgroundcolor: this.backgroundcolor ? this.backgroundcolor : '#f4b41f',
             src2: this.src2 ? this.src2 : 'Advcash.png',
             text2: '',
             backgroundcolor2: this.backgroundcolor2 ? this.backgroundcolor2 : 'linear-gradient(135deg, rgb(26, 159, 41), rgb(13, 117, 24))',
@@ -66,22 +67,34 @@ export default {
             buyprice: '',
             cardnumberbank: " ",
             cardnumbercrypto: '',
-            utf:  this.src1 ? this.src1 : 'BTC',
+            utf: this.src1 ? this.src1 : 'BTC',
             color: '',
-            cost:  this.cost? this.cost : 0,
-            min: '',
-            max: ''
+            cost: this.cost ? this.cost : 0,
+            min: 1,
+            max: 1,
+            error: false
         }
 
     },
-    validations: {
-    cardnumberbank: {
-      required,
+    validations() {
+        return {
+            cardnumberbank: {
+                required,
+            },
+            sellprice: {
+                required,
+                between: between(this.min, this.max)
+            }
+        }
     },
-   
-  },
 
     methods: {
+        checkSellprice() {
+            if (!this.$v.sellprice.between) {
+                this.error = true
+            }
+        },
+
         getImgUrl(pic) {
             return require('../assets/' + pic);
         },
@@ -110,15 +123,16 @@ export default {
         }
 
     },
-  
 
     created() {
         bus.$on('cryptoData', data => {
             this.src1 = data[0];
             this.backgroundcolor = data[2];
             this.utf = data[3],
-            this.color = data[4],
-            this.cost = data[6]
+                this.color = data[4],
+                this.cost = data[6],
+                this.min = data[7],
+                this.max = data[8]
         })
 
         bus.$on('bankData', data => {
@@ -131,7 +145,7 @@ export default {
     watch: {
         sellprice: function (val) {
             this.sellprice = val;
-            this.buyprice = val * (this.cost*0.97);
+            this.buyprice = val * (this.cost * 0.97);
         },
         buyprice: function (val) {
             this.buyprice = val;
@@ -153,7 +167,7 @@ input::placeholder {
     color: rgba(0, 0, 0, 0.493);
 }
 
-.rightb {
+.calculate-block {
     font-family: 'Hind Siliguri', sans-serif;
     padding: 10px 30px;
     width: 90%;
@@ -164,19 +178,18 @@ input::placeholder {
     box-shadow: 0 2px 4px #c4c2c2;
     border-radius: 4px;
 
-    h2 {
-        font-size: 25px;
-        font-weight: 500;
-        color: black;
-    }
-
-    .cryptochange {
+    &__cryptochange, &__bankchange {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
 
-        .wallet {
+        &--heading {
+            font-size: 25px;
+            font-weight: 500;
+            color: black;
+        }
 
+        &-wallet {
             padding: 20px 20px;
             box-shadow: 0 2px 4px #c4c2c2;
             border-radius: 4px;
@@ -188,18 +201,17 @@ input::placeholder {
                 font-size: 17px;
             }
 
-            .top {
+            &-top {
                 img {
                     width: 50px;
                     height: 50px;
                 }
-
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
             }
 
-            .bottom {
+            &-bottom {
                 font-size: 19px;
                 text-align: left;
 
@@ -208,7 +220,7 @@ input::placeholder {
                 }
             }
 
-            .center {
+            &-center {
                 font-size: 19px;
                 display: flex;
                 flex-direction: column;
@@ -226,181 +238,12 @@ input::placeholder {
         }
     }
 
-    .bankchange {
-        margin-top: 30px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-
-        .wallet {
-            color: white;
-
-            padding: 20px 20px;
-            box-shadow: 0 2px 4px #c4c2c2;
-            border-radius: 4px;
-            width: 70%;
-            display: flex;
-            flex-direction: column;
-
-            .top {
-                img {
-                    width: 50px;
-                    height: 50px;
-                }
-
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-            }
-
-            .bottom {
-                font-size: 19px;
-                text-align: left;
-
-                input {
-                    color: white
-                }
-            }
-
-            .center {
-                font-size: 19px;
-                display: flex;
-                flex-direction: column;
-                text-align: left;
-
-                input {
-                    color: white;
-                    font-size: 22px;
-                }
-            }
+    &__bankchange{
+        margin-top: 40px;
+        color: white;
+        input{
+            color: white
         }
     }
-
-}
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-    .rightb {
-    font-family: 'Hind Siliguri', sans-serif;
-    padding: 10px 0px;
-    width: 100%;
-    background: white;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 2px 4px #c4c2c2;
-    border-radius: 4px;
-
-    h2 {
-        font-size: 25px;
-        font-weight: 500;
-        color: black;
-    }
-
-    .cryptochange {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        .wallet {
-
-            padding: 20px 10px;
-            box-shadow: 0 2px 4px #c4c2c2;
-            border-radius: 4px;
-            width: 90%;
-            display: flex;
-            flex-direction: column;
-
-            input {
-                font-size: 17px;
-            }
-
-            .top {
-                img {
-                    width: 50px;
-                    height: 50px;
-                }
-
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-            }
-
-            .bottom {
-                font-size: 19px;
-                text-align: left;
-
-                input {
-                    min-width: 20px;
-                }
-            }
-
-            .center {
-                font-size: 19px;
-                display: flex;
-                flex-direction: column;
-                text-align: left;
-
-                p {
-                    margin-top: 15px;
-                    margin-bottom: 10px;
-                }
-
-                input {
-                    text-align: center;
-                }
-            }
-        }
-    }
-
-    .bankchange {
-        margin-top: 30px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        .wallet {
-            color: white;
-
-            padding: 20px 10px;
-            box-shadow: 0 2px 4px #c4c2c2;
-            border-radius: 4px;
-            width: 90%;
-            display: flex;
-            flex-direction: column;
-
-            .top {
-                img {
-                    width: 50px;
-                    height: 50px;
-                }
-
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-            }
-
-            .bottom {
-                font-size: 19px;
-                text-align: left;
-
-                input {
-                    color: white
-                }
-            }
-
-            .center {
-                font-size: 19px;
-                display: flex;
-                flex-direction: column;
-                text-align: left;
-
-                input {
-                    color: white;
-                    font-size: 22px;
-                }
-            }
-        }
-    }
-
-}
 }
 </style>

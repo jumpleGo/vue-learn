@@ -35,7 +35,7 @@ export default {
         },
 
         viewDetailsClicked() {
-            bus.$emit("cryptoData", [this.crypto.src, this.crypto.text, this.crypto.backgroundcolor, this.crypto.utf, this.crypto.color, this.crypto.address, this.crypto.cost])
+            bus.$emit("cryptoData", [this.crypto.src, this.crypto.text, this.crypto.backgroundcolor, this.crypto.utf, this.crypto.color, this.crypto.address, this.crypto.cost, this.crypto.min, this.crypto.max])
         },
     },
 }

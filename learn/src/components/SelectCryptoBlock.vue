@@ -49,7 +49,7 @@ export default {
         GiveItem,
         GetItem
     },
-    name: 'Leftbl',
+    name: 'SelectCryptoBlock',
 
     data() {
         return {
@@ -66,7 +66,9 @@ export default {
                     color: 'black',
                     qr: 'btcqr.png',
                     address: '1KKPEEgq6tXLMnSAi2WzxvVwTKy8cCNf8B',
-                    cost: Number
+                    cost: Number,
+                    min: 0.001,
+                    max: 0.9
 
                 },
                 {
@@ -78,7 +80,9 @@ export default {
                     utf: 'USDT',
                     color: 'white',
                     address: '0x812F5027bc4E4BdeF37196D50c5dA2f192E5AccF',
-                    cost: Number
+                    cost: Number,
+                    min: 20,
+                    max: 3000
 
                 },
                 {
@@ -90,7 +94,9 @@ export default {
                     color: "black",
                     qr: 'neoqr.png',
                     address: 'AGZDrsHRDLAtwXfksakJnwsAo3d1b6zH5J',
-                    cost: Number
+                    cost: Number,
+                    min: 5,
+                    max: 300
                 },
                 {
                     id: '4',
@@ -101,7 +107,9 @@ export default {
                     color: 'white',
                     qr: 'ethqr.png',
                     address: '0x812F5027bc4E4BdeF37196D50c5dA2f192E5Acc',
-                    cost: Number
+                    cost: Number,
+                    min: 0.08,
+                    max: 20
                 },
                 {
                     id: '5',
@@ -112,7 +120,9 @@ export default {
                     utf: "BNB",
                     color: 'white',
                     address: 'bnb1f4nmk0sp6swcslc7whtq5lechm3cxmd82gzg3h',
-                    cost: Number
+                    cost: Number,
+                    min: 1,
+                    max: 100
                 },
                 {
                     id: '6',
@@ -123,7 +133,9 @@ export default {
                     utf: "LTC",
                     color: 'black',
                     address: 'LV3ZxLMhfmJZyNgKDKG1jSrWZq9m19BTwV',
-                    cost: Number
+                    cost: Number,
+                    min: 0.25,
+                    max: 38
                 }
 
             ],
